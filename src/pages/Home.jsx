@@ -17,7 +17,7 @@ const Home = ({ showPage, isEnglish }) => {
           <img 
             src="/logo_vertical.jpg" 
             alt="心沐智康 Ximory" 
-            className="mx-auto mb-8 h-40 w-auto"
+            className="mx-auto mb-8 h-40 w-auto opacity-90 mix-blend-multiply"
           />
           
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
