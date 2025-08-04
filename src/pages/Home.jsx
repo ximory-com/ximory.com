@@ -12,22 +12,39 @@ const Home = ({ showPage, isEnglish }) => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 min-h-screen relative overflow-hidden">
+      <section className="py-20 bg-black min-h-screen relative overflow-hidden">
         {/* 科技感背景装饰 */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-green-600/10"></div>
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0">
+          {/* 网格背景 */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20"></div>
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}></div>
+          
+          {/* 动态光效 */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+          
+          {/* 粒子效果 */}
+          <div className="absolute top-10 left-10 w-2 h-2 bg-blue-400 rounded-full animate-ping"></div>
+          <div className="absolute top-20 right-20 w-1 h-1 bg-cyan-400 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+          <div className="absolute bottom-20 left-20 w-1.5 h-1.5 bg-purple-400 rounded-full animate-ping" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute bottom-10 right-10 w-1 h-1 bg-green-400 rounded-full animate-ping" style={{animationDelay: '2.5s'}}></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <img 
             src="/logo_vertical.jpg" 
             alt="心沐智康 Ximory" 
-            className="mx-auto mb-8 h-32 w-auto rounded-lg shadow-2xl bg-white/95 p-4 backdrop-blur-sm border border-white/20"
+            className="mx-auto mb-8 h-40 w-auto filter drop-shadow-2xl"
           />
           
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-6 leading-tight">
             {isEnglish ? (
               <>
                 Empowering Health with Intelligence<br />
@@ -41,7 +58,7 @@ const Home = ({ showPage, isEnglish }) => {
             )}
           </h1>
           
-          <p className="text-xl text-blue-200 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-blue-300 mb-12 max-w-3xl mx-auto font-light">
             {isEnglish 
               ? 'AI Empowerment · Digital Health · Human Care'
               : 'AI 赋能 · 数字健康 · 人本关怀'
@@ -58,14 +75,13 @@ const Home = ({ showPage, isEnglish }) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button 
               onClick={() => showPage('health-assessment')}
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg hover:shadow-xl border border-blue-500/30"
+              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl border-2 border-blue-500"
             >
               {isEnglish ? 'Free Health Assessment' : '免费健康评估'}
             </Button>
             <Button 
               onClick={() => scrollToSection('about')}
-              variant="outline"
-              className="w-full sm:w-auto border-2 border-white/30 text-white px-8 py-3 rounded-lg font-medium hover:bg-white/10 transition-all backdrop-blur-sm"
+              className="w-full sm:w-auto bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition-all"
             >
               {isEnglish ? 'Learn More' : '了解更多'}
             </Button>
