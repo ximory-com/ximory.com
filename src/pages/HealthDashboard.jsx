@@ -6,16 +6,35 @@ import { RefreshCw, TrendingUp, Users, Calendar, Award } from 'lucide-react'
 const HealthDashboard = ({ healthDataManager, showPage, isEnglish }) => {
   const [statistics, setStatistics] = useState({})
   const [recentAssessments, setRecentAssessments] = useState([])
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     refreshData()
   }, [])
 
-  const refreshData = () => {
-    const stats = healthDataManager.getStatistics()
-    const recent = healthDataManager.getRecentAssessments()
-    setStatistics(stats)
-    setRecentAssessments(recent)
+  const refreshData = async () => {
+    console.log('刷新数据开始...')
+    setIsRefreshing(true)
+    
+    try {
+      // 添加短暂延迟以显示刷新动画
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      const stats = healthDataManager.getStatistics()
+      const recent = healthDataManager.getRecentAssessments()
+      
+      console.log('获取到的统计数据:', stats)
+      console.log('获取到的最近评估:', recent)
+      
+      setStatistics(stats)
+      setRecentAssessments(recent)
+      
+      console.log('数据刷新完成')
+    } catch (error) {
+      console.error('刷新数据时出错:', error)
+    } finally {
+      setIsRefreshing(false)
+    }
   }
 
   const formatDate = (dateString) => {
@@ -101,10 +120,14 @@ const HealthDashboard = ({ healthDataManager, showPage, isEnglish }) => {
             </div>
             <Button 
               onClick={refreshData}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              disabled={isRefreshing}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
-              <RefreshCw className="w-4 h-4 mr-2" />
-              {isEnglish ? 'Refresh Data' : '刷新数据'}
+              <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+              {isRefreshing 
+                ? (isEnglish ? 'Refreshing...' : '刷新中...') 
+                : (isEnglish ? 'Refresh Data' : '刷新数据')
+              }
             </Button>
           </div>
         </div>
