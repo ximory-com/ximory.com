@@ -7,25 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* 页面切换样式 */
-        #home, #health-assessment, #health-dashboard {
-            display: none;
-        }
-        #home.active, #health-assessment.active, #health-dashboard.active {
-            display: block;
-        }
-    </style>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <meta name="description" content="心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案">
-    <meta name="keywords" content="AI健康评估,数字健康,健康管理,人工智能,心沐智康">
-    <style>
         .hero-logo { height: 128px; }
         .nav-logo { height: 48px; }
         .gradient-bg { background: linear-gradient(135deg, #e0f2fe 0%, #f5f5f5 50%, #e8f5e8 100%); }
         .health-assessment { display: none; }
         .health-assessment.active { display: block; }
+        .health-dashboard { display: none; }
+        .health-dashboard.active { display: block; }
         .progress-bar { transition: width 0.3s ease; }
         .score-bar { transition: width 1s ease; }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
     </style>
 </head>
 <body class="gradient-bg min-h-screen">
@@ -35,19 +27,18 @@
             <div class="flex justify-between items-center h-16">
                 <!-- LOGO -->
                 <div class="flex items-center">
-                    <img src="logo_horizontal.png" alt="心沐智康" class="nav-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div class="text-xl font-bold text-blue-600" style="display:none;">XIMORY</div>
+                    <div class="text-2xl font-bold text-blue-600">心沐智康</div>
                 </div>
                 
                 <!-- 桌面端导航菜单 -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" onclick="showHome()" class="text-gray-700 hover:text-blue-600 font-medium">首页</a>
+                    <a href="#" onclick="showPage('home')" class="text-gray-700 hover:text-blue-600 font-medium">首页</a>
                     <a href="#about" onclick="scrollToSection('about')" class="text-gray-700 hover:text-blue-600 font-medium">关于我们</a>
                     <a href="#services" onclick="scrollToSection('services')" class="text-gray-700 hover:text-blue-600 font-medium">产品与服务</a>
                     <a href="#solutions" onclick="scrollToSection('solutions')" class="text-gray-700 hover:text-blue-600 font-medium">解决方案</a>
-                    <a href="#" onclick="showHealthAssessment()" class="text-gray-700 hover:text-blue-600 font-medium">健康评估</a>
+                    <a href="#" onclick="showPage('health-assessment')" class="text-gray-700 hover:text-blue-600 font-medium">健康评估</a>
                     <a href="#contact" onclick="scrollToSection('contact')" class="text-gray-700 hover:text-blue-600 font-medium">联系我们</a>
-                    <a href="#" onclick="openDashboard()" class="text-gray-700 hover:text-blue-600 font-medium">数据仪表板</a>
+                    <a href="#" onclick="showPage('health-dashboard')" class="text-gray-700 hover:text-blue-600 font-medium">数据仪表板</a>
                 </div>
                 
                 <!-- 语言切换和移动端菜单 -->
@@ -66,43 +57,39 @@
             <!-- 移动端菜单 -->
             <div id="mobile-menu" class="hidden md:hidden pb-4">
                 <div class="flex flex-col space-y-2">
-                    <a href="#" onclick="showHome(); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">首页</a>
-                    <a href="#about" onclick="scrollToSection('about'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">关于我们</a>
-                    <a href="#services" onclick="scrollToSection('services'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">产品与服务</a>
-                    <a href="#solutions" onclick="scrollToSection('solutions'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">解决方案</a>
-                    <a href="#" onclick="showHealthAssessment(); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">健康评估</a>
-                    <a href="#contact" onclick="scrollToSection('contact'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">联系我们</a>
-                    <a href="#" onclick="openDashboard()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">数据仪表板</a>
+                    <a href="#" onclick="showPage('home')" class="text-gray-700 hover:text-blue-600 font-medium py-2">首页</a>
+                    <a href="#about" onclick="scrollToSection('about')" class="text-gray-700 hover:text-blue-600 font-medium py-2">关于我们</a>
+                    <a href="#services" onclick="scrollToSection('services')" class="text-gray-700 hover:text-blue-600 font-medium py-2">产品与服务</a>
+                    <a href="#solutions" onclick="scrollToSection('solutions')" class="text-gray-700 hover:text-blue-600 font-medium py-2">解决方案</a>
+                    <a href="#" onclick="showPage('health-assessment')" class="text-gray-700 hover:text-blue-600 font-medium py-2">健康评估</a>
+                    <a href="#contact" onclick="scrollToSection('contact')" class="text-gray-700 hover:text-blue-600 font-medium py-2">联系我们</a>
+                    <a href="#" onclick="showPage('health-dashboard')" class="text-gray-700 hover:text-blue-600 font-medium py-2">数据仪表板</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- 主内容 -->
-    <div id="home" class="active">
-        <div id="main-content">
+    <!-- 主页内容 -->
+    <div id="home" class="page-section active">
         <!-- Hero Section -->
-        <section class="py-20 text-center">
-            <div class="max-w-6xl mx-auto px-4">
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div class="mb-8">
-                    <img src="logo_vertical.jpg" alt="心沐智康" class="hero-logo mx-auto mb-6" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div class="text-6xl mb-6" style="display:none;">🧠</div>
+                    <div class="hero-logo mx-auto mb-8 w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center">
+                        <div class="text-4xl font-bold text-blue-600">心沐</div>
+                    </div>
                 </div>
-                
-                <h1 id="hero-title" class="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-                    用智慧赋能健康<br>让心灵沐浴科技之光
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+                    <span id="hero-title">用智慧赋能健康<br>让心灵沐浴科技之光</span>
                 </h1>
-                
-                <p id="hero-subtitle" class="text-xl md:text-2xl text-gray-600 mb-4 font-medium">
-                    AI 赋能 · 数字健康 · 人本关怀
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    <span id="hero-subtitle">AI 赋能 · 数字健康 · 人本关怀</span>
                 </p>
-                
-                <p id="hero-description" class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
-                    心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案
+                <p class="text-lg text-gray-500 mb-12 max-w-4xl mx-auto">
+                    <span id="hero-description">心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案</span>
                 </p>
-                
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="showHealthAssessment()" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-green-700 transition-all">
+                    <button onclick="showPage('health-assessment')" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-green-700 transition-all">
                         <span id="assessment-btn">免费健康评估</span>
                     </button>
                     <button onclick="scrollToSection('about')" class="w-full sm:w-auto border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-600 hover:text-white transition-all">
@@ -114,451 +101,262 @@
 
         <!-- 关于我们 -->
         <section id="about" class="py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-4">
-                <h2 id="about-title" class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">关于我们</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">关于我们</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h3 id="brand-vision-title" class="text-2xl font-semibold text-gray-800 mb-6">品牌愿景</h3>
-                        <p id="brand-vision-content" class="text-gray-600 text-lg leading-relaxed mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">品牌愿景</h3>
+                        <p class="text-gray-600 mb-6">
                             让智慧与心灵共生，赋能每一个生命真实成长。我们相信健康不仅是身体无恙，更是身心灵的和谐共鸣。
                         </p>
-                        
-                        <h3 id="core-values-title" class="text-2xl font-semibold text-gray-800 mb-6">核心价值</h3>
                         <div class="space-y-4">
-                            <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-3"></div>
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+                                </div>
                                 <div>
-                                    <h4 id="value1-title" class="font-semibold text-gray-800">人本关怀</h4>
-                                    <p id="value1-desc" class="text-gray-600">以人为本，关注每个个体的真实需求</p>
+                                    <h4 class="font-semibold text-gray-900">AI赋能健康管理</h4>
+                                    <p class="text-gray-600">运用先进AI技术，提供个性化健康解决方案</p>
                                 </div>
                             </div>
-                            <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-green-600 rounded-full mt-3"></div>
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <div class="w-2 h-2 bg-green-600 rounded-full"></div>
+                                </div>
                                 <div>
-                                    <h4 id="value2-title" class="font-semibold text-gray-800">AI 赋能</h4>
-                                    <p id="value2-desc" class="text-gray-600">运用人工智能技术提升健康管理效率</p>
+                                    <h4 class="font-semibold text-gray-900">数字化健康生态</h4>
+                                    <p class="text-gray-600">构建完整的数字健康管理生态系统</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="text-center">
-                        <div class="bg-gradient-to-br from-blue-100 to-green-100 rounded-2xl p-8">
-                            <div class="text-6xl mb-4">🧠</div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">智能健康管理</h3>
-                            <p class="text-gray-600">基于AI的个性化健康解决方案</p>
+                    <div class="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl">
+                        <div class="text-center">
+                            <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                                <div class="text-2xl">🧠</div>
+                            </div>
+                            <h4 class="text-xl font-semibold text-gray-900 mb-4">智能健康评估</h4>
+                            <p class="text-gray-600">基于AI算法的综合健康评估系统，为您提供专业的健康指导建议</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 产品与服务 -->
-        <section id="services" class="py-20 gradient-bg">
-            <div class="max-w-6xl mx-auto px-4">
-                <h2 id="services-title" class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">产品与服务</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                        <div class="text-4xl mb-4 text-center">🤖</div>
-                        <h3 id="service1-title" class="text-xl font-semibold text-gray-800 mb-4 text-center">AI健康评估</h3>
-                        <p id="service1-desc" class="text-gray-600 text-center">基于人工智能的个性化健康风险评估和预测</p>
-                    </div>
-                    
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                        <div class="text-4xl mb-4 text-center">📊</div>
-                        <h3 id="service2-title" class="text-xl font-semibold text-gray-800 mb-4 text-center">数字健康管理</h3>
-                        <p id="service2-desc" class="text-gray-600 text-center">全方位的数字化健康数据管理和分析平台</p>
-                    </div>
-                    
-                    <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                        <div class="text-4xl mb-4 text-center">📚</div>
-                        <h3 id="service3-title" class="text-xl font-semibold text-gray-800 mb-4 text-center">健康教育</h3>
-                        <p id="service3-desc" class="text-gray-600 text-center">个性化的健康知识推送和生活方式指导</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 解决方案 -->
-        <section id="solutions" class="py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-4">
-                <h2 id="solutions-title" class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">解决方案</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8">
-                        <div class="text-4xl mb-4">👤</div>
-                        <h3 id="solution1-title" class="text-2xl font-semibold text-gray-800 mb-4">个人健康管理</h3>
-                        <p id="solution1-desc" class="text-gray-600 mb-6">为个人用户提供全面的健康数据收集、分析和管理服务，帮助用户更好地了解和管理自己的健康状况。</p>
-                        
-                        <ul class="space-y-2">
-                            <li class="flex items-center space-x-2">
-                                <span class="text-green-600">✓</span>
-                                <span id="solution1-feature1" class="text-gray-700">健康数据实时监测</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <span class="text-green-600">✓</span>
-                                <span id="solution1-feature2" class="text-gray-700">个性化健康建议</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <span class="text-green-600">✓</span>
-                                <span id="solution1-feature3" class="text-gray-700">健康风险预警</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8">
-                        <div class="text-4xl mb-4">🏢</div>
-                        <h3 id="solution2-title" class="text-2xl font-semibold text-gray-800 mb-4">企业健康服务</h3>
-                        <p id="solution2-desc" class="text-gray-600 mb-6">为企业提供员工健康管理解决方案，提升员工健康水平，降低企业医疗成本。</p>
-                        
-                        <ul class="space-y-2">
-                            <li class="flex items-center space-x-2">
-                                <span class="text-green-600">✓</span>
-                                <span id="solution2-feature1" class="text-gray-700">员工健康体检</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <span class="text-green-600">✓</span>
-                                <span id="solution2-feature2" class="text-gray-700">健康数据分析</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <span class="text-green-600">✓</span>
-                                <span id="solution2-feature3" class="text-gray-700">健康培训课程</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- 联系我们 -->
-        <section id="contact" class="py-20 gradient-bg">
-            <div class="max-w-6xl mx-auto px-4">
-                <h2 id="contact-title" class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">联系我们</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div>
-                        <h3 id="contact-info-title" class="text-2xl font-semibold text-gray-800 mb-8">联系方式</h3>
-                        
+        <section id="contact" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">联系我们</h2>
+                    <p class="text-xl text-gray-600">让我们一起构建更健康的未来</p>
+                </div>
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
                         <div class="space-y-6">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                                    <span class="text-blue-600 text-xl">📧</span>
-                                </div>
-                                <div>
-                                    <h4 id="contact-email-label" class="font-semibold text-gray-800">企业邮箱</h4>
-                                    <a href="mailto:contact@ximory.com" class="text-blue-600 hover:underline">contact@ximory.com</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                    <span class="text-green-600 text-xl">🛠️</span>
-                                </div>
-                                <div>
-                                    <h4 id="contact-support-label" class="font-semibold text-gray-800">技术支持</h4>
-                                    <a href="mailto:support@ximory.com" class="text-blue-600 hover:underline">support@ximory.com</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                                    <span class="text-purple-600 text-xl">👨‍💼</span>
-                                </div>
-                                <div>
-                                    <h4 id="contact-ceo-label" class="font-semibold text-gray-800">创始人邮箱</h4>
-                                    <a href="mailto:ceo@ximory.com" class="text-blue-600 hover:underline">ceo@ximory.com</a>
+                            <div class="text-center">
+                                <h3 class="text-xl font-semibold text-gray-900 mb-4">联系信息</h3>
+                                <div class="space-y-3">
+                                    <p class="text-gray-600">
+                                        <strong>邮箱：</strong> contact@ximory.com
+                                    </p>
+                                    <p class="text-gray-600">
+                                        <strong>网站：</strong> www.ximory.com
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div>
-                        <h3 id="business-cooperation-title" class="text-2xl font-semibold text-gray-800 mb-6">商务合作咨询</h3>
-                        <p id="business-cooperation-desc" class="text-gray-600 mb-8">如果您对我们的产品和服务感兴趣，或希望与我们建立合作关系，请通过以下方式联系我们。</p>
-                        
-                        <h4 id="cooperation-methods-title" class="text-lg font-semibold text-gray-800 mb-4">合作方式</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center space-x-2">
-                                <span class="text-blue-600">•</span>
-                                <span id="cooperation-method1" class="text-gray-700">技术合作与集成</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <span class="text-blue-600">•</span>
-                                <span id="cooperation-method2" class="text-gray-700">渠道合作与推广</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <span class="text-blue-600">•</span>
-                                <span id="cooperation-method3" class="text-gray-700">定制化解决方案</span>
-                            </li>
-                            <li class="flex items-center space-x-2">
-                                <span class="text-blue-600">•</span>
-                                <span id="cooperation-method4" class="text-gray-700">投资与战略合作</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    </div>
 
-    <!-- 健康评估界面 -->
-    <div id="health-assessment" class="health-assessment min-h-screen py-20">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="bg-white rounded-2xl shadow-xl p-8">
-                <!-- 返回按钮 -->
-                <div class="mb-6">
-                    <button onclick="showHome()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                        </svg>
-                        <span id="back-btn">返回首页</span>
-                    </button>
-                </div>
-
-                <!-- 标题 -->
+    <!-- 健康评估页面 -->
+    <div id="health-assessment" class="page-section min-h-screen py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-lg p-8">
                 <div class="text-center mb-8">
-                    <h1 id="assessment-title" class="text-3xl font-bold text-gray-800 mb-2">AI健康评估</h1>
-                    <p id="assessment-subtitle" class="text-gray-600">获得AI驱动的个性化健康洞察</p>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-4">AI健康评估</h1>
+                    <p class="text-gray-600">通过科学的评估方法，了解您的健康状况</p>
                 </div>
 
                 <!-- 进度条 -->
                 <div class="mb-8">
                     <div class="flex justify-between items-center mb-2">
-                        <span id="step1-label" class="text-sm font-medium text-blue-600">基本信息</span>
-                        <span id="step2-label" class="text-sm font-medium text-gray-400">生活习惯</span>
-                        <span id="step3-label" class="text-sm font-medium text-gray-400">评估结果</span>
+                        <span class="text-sm font-medium text-gray-700">评估进度</span>
+                        <span class="text-sm font-medium text-gray-700" id="progress-text">第1步，共3步</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 33%"></div>
+                        <div id="progress-bar" class="bg-gradient-to-r from-blue-600 to-green-600 h-2 rounded-full progress-bar" style="width: 33%"></div>
                     </div>
                 </div>
 
-                <!-- 步骤1: 基本信息 -->
-                <div id="step1" class="assessment-step">
-                    <h2 class="text-xl font-semibold mb-6">
-                        <span id="basic-info-title">基本信息</span>
-                    </h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- 步骤1：基本信息 -->
+                <div id="step-1" class="step-content">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">基本信息</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="age-label">年龄</span>
-                            </label>
-                            <input type="number" id="age" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="请输入年龄">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">年龄</label>
+                            <input type="number" id="age" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="请输入年龄" min="1" max="120">
                         </div>
-
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="gender-label">性别</span>
-                            </label>
-                            <select id="gender" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">性别</label>
+                            <select id="gender" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">请选择性别</option>
                                 <option value="male">男</option>
                                 <option value="female">女</option>
                             </select>
                         </div>
-
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="height-label">身高 (厘米)</span>
-                            </label>
-                            <input type="number" id="height" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="请输入身高">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">身高 (cm)</label>
+                            <input type="number" id="height" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="请输入身高" min="100" max="250">
                         </div>
-
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="weight-label">体重 (公斤)</span>
-                            </label>
-                            <input type="number" id="weight" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="请输入体重">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">体重 (kg)</label>
+                            <input type="number" id="weight" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="请输入体重" min="30" max="300">
                         </div>
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <button onclick="nextStep()" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">下一步</button>
                     </div>
                 </div>
 
-                <!-- 步骤2: 生活习惯 -->
-                <div id="step2" class="assessment-step hidden">
-                    <h2 class="text-xl font-semibold mb-6">
-                        <span id="lifestyle-title">生活习惯</span>
-                    </h2>
-                    
-                    <div class="space-y-4">
+                <!-- 步骤2：生活习惯 -->
+                <div id="step-2" class="step-content" style="display: none;">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">生活习惯</h2>
+                    <div class="space-y-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="exercise-label">运动频率</span>
-                            </label>
-                            <select id="exercise" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="">请选择频率</option>
-                                <option value="daily">每天</option>
-                                <option value="weekly">每周</option>
-                                <option value="monthly">每月</option>
-                                <option value="never">从不</option>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">运动频率</label>
+                            <select id="exercise" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">请选择运动频率</option>
+                                <option value="never">从不运动</option>
+                                <option value="rarely">偶尔运动</option>
+                                <option value="sometimes">每周2-3次</option>
+                                <option value="regularly">每天运动</option>
                             </select>
                         </div>
-
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="sleep-label">睡眠质量</span>
-                            </label>
-                            <select id="sleep" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="">请选择质量</option>
-                                <option value="excellent">优秀</option>
-                                <option value="good">良好</option>
-                                <option value="fair">一般</option>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">睡眠质量</label>
+                            <select id="sleep" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">请选择睡眠质量</option>
                                 <option value="poor">较差</option>
+                                <option value="fair">一般</option>
+                                <option value="good">良好</option>
+                                <option value="excellent">优秀</option>
                             </select>
                         </div>
-
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="smoking-label">吸烟</span>
-                            </label>
-                            <select id="smoking" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">是否吸烟</label>
+                            <select id="smoking" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">请选择</option>
-                                <option value="yes">是</option>
                                 <option value="no">否</option>
+                                <option value="yes">是</option>
                             </select>
                         </div>
-
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <span id="drinking-label">饮酒</span>
-                            </label>
-                            <select id="drinking" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="">请选择频率</option>
-                                <option value="never">从不</option>
-                                <option value="light">偶尔</option>
-                                <option value="moderate">适量</option>
-                                <option value="heavy">经常</option>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">饮酒频率</label>
+                            <select id="alcohol" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">请选择饮酒频率</option>
+                                <option value="never">从不饮酒</option>
+                                <option value="occasionally">偶尔饮酒</option>
+                                <option value="weekly">每周饮酒</option>
+                                <option value="daily">每天饮酒</option>
                             </select>
                         </div>
                     </div>
+                    <div class="flex justify-between mt-8">
+                        <button onclick="prevStep()" class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition-colors">上一步</button>
+                        <button onclick="submitAssessment()" class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition-colors">获取结果</button>
+                    </div>
                 </div>
 
-                <!-- 步骤3: 评估结果 -->
-                <div id="step3" class="assessment-step hidden">
-                    <div class="text-center space-y-6">
-                        <h2 class="text-2xl font-semibold mb-6">
-                            <span id="results-title">您的健康评估结果</span>
-                        </h2>
-                        
-                        <div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-8">
-                            <div class="text-6xl font-bold mb-4">
-                                <span id="health-score" class="text-blue-600">85</span>
-                                <span class="text-gray-400 text-3xl">/100</span>
-                            </div>
-                            
-                            <div id="score-level" class="text-2xl font-semibold mb-4 text-blue-600">
-                                优秀
-                            </div>
-                            
-                            <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
-                                <div id="score-bar" class="score-bar h-4 rounded-full bg-blue-500" style="width: 85%"></div>
-                            </div>
-
-                            <div class="text-gray-600 mb-6">
-                                <span id="recommendations-intro">根据您的回答，以下是一些建议：</span>
-                            </div>
-
-                            <div id="recommendations" class="text-left space-y-2 text-sm">
+                <!-- 步骤3：评估结果 -->
+                <div id="step-3" class="step-content" style="display: none;">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">评估结果</h2>
+                    <div class="text-center mb-8">
+                        <div class="text-6xl font-bold text-blue-600 mb-4" id="health-score">85</div>
+                        <div class="text-2xl font-semibold mb-4" id="score-level">健康状况良好</div>
+                        <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+                            <div id="score-bar" class="bg-gradient-to-r from-green-400 to-green-600 h-4 rounded-full score-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">健康建议</h3>
+                            <div id="recommendations" class="space-y-3">
                                 <!-- 建议内容将通过JavaScript动态生成 -->
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- 按钮 -->
-                <div class="flex justify-between mt-8">
-                    <button id="prev-btn" onclick="prevStep()" class="px-6 py-3 bg-gray-500 text-white rounded-lg font-medium hover:bg-gray-600 hidden">
-                        <span id="prev-text">上一步</span>
-                    </button>
-
-                    <button id="next-btn" onclick="nextStep()" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 ml-auto">
-                        <span id="next-text">下一步</span>
-                    </button>
-
-                    <button id="restart-btn" onclick="restartAssessment()" class="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 hidden">
-                        <span id="restart-text">重新评估</span>
-                    </button>
+                    
+                    <div class="flex justify-center mt-8">
+                        <button onclick="resetAssessment()" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">重新评估</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 数据仪表板页面 -->
-    <div id="health-dashboard" class="health-assessment min-h-screen py-20">
-        <div class="max-w-7xl mx-auto px-4">
-            <!-- 返回按钮和标题 -->
-            <div class="flex justify-between items-center mb-8">
-                <div class="flex items-center space-x-4">
-                    <button onclick="showHome()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                        </svg>
-                        <span>返回首页</span>
-                    </button>
-                    <h1 class="text-3xl font-bold text-gray-800">健康数据仪表板</h1>
+    <div id="health-dashboard" class="page-section min-h-screen py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">健康数据仪表板</h1>
+                <div class="flex justify-between items-center">
+                    <p class="text-gray-600">查看健康评估的统计数据和趋势分析</p>
+                    <button onclick="refreshDashboard()" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">刷新数据</button>
                 </div>
-                <button id="dashboard-refresh-btn" onclick="loadDashboardData()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    刷新数据
-                </button>
             </div>
 
             <!-- 统计卡片 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow p-6">
                     <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-blue-100 text-blue-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <div class="w-6 h-6 text-blue-600">📊</div>
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">总评估次数</p>
-                            <p id="dashboard-total-assessments" class="text-2xl font-semibold text-gray-900">-</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="total-assessments">0</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                
+                <div class="bg-white rounded-lg shadow p-6">
                     <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-green-100 text-green-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
+                        <div class="p-2 bg-green-100 rounded-lg">
+                            <div class="w-6 h-6 text-green-600">💚</div>
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">平均健康评分</p>
-                            <p id="dashboard-average-score" class="text-2xl font-semibold text-gray-900">-</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="average-score">0</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                
+                <div class="bg-white rounded-lg shadow p-6">
                     <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                        <div class="p-2 bg-yellow-100 rounded-lg">
+                            <div class="w-6 h-6 text-yellow-600">📅</div>
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">今日评估</p>
-                            <p id="dashboard-today-assessments" class="text-2xl font-semibold text-gray-900">-</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="today-assessments">0</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                
+                <div class="bg-white rounded-lg shadow p-6">
                     <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-purple-100 text-purple-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
+                        <div class="p-2 bg-purple-100 rounded-lg">
+                            <div class="w-6 h-6 text-purple-600">⭐</div>
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">优秀评分比例</p>
-                            <p id="dashboard-excellent-ratio" class="text-2xl font-semibold text-gray-900">-</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="excellent-percentage">0%</p>
                         </div>
                     </div>
                 </div>
@@ -566,31 +364,31 @@
 
             <!-- 图表区域 -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <!-- 评分分布图 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">健康评分分布</h3>
                     <div class="h-64">
-                        <canvas id="dashboard-score-chart"></canvas>
+                        <canvas id="score-chart"></canvas>
                     </div>
                 </div>
-
-                <!-- 年龄分布图 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                
+                <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">年龄分布</h3>
                     <div class="h-64">
-                        <canvas id="dashboard-age-chart"></canvas>
+                        <canvas id="age-chart"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!-- 最近评估记录 -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">最近评估记录</h3>
+            <!-- 评估记录表格 -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900">最近评估记录</h3>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">评估时间</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">年龄</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">性别</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">BMI</th>
@@ -598,9 +396,9 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">风险等级</th>
                             </tr>
                         </thead>
-                        <tbody id="dashboard-assessment-table" class="bg-white divide-y divide-gray-200">
+                        <tbody id="assessment-table" class="bg-white divide-y divide-gray-200">
                             <tr>
-                                <td colspan="6" class="px-6 py-4 text-center text-gray-500">正在加载数据...</td>
+                                <td colspan="6" class="px-6 py-4 text-center text-gray-500">暂无评估记录</td>
                             </tr>
                         </tbody>
                     </table>
@@ -609,32 +407,151 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <div class="mb-4">
-                <span class="text-2xl font-bold">XIMORY</span>
-            </div>
-            <p class="text-gray-400">
-                <span id="footer-text">© 2025 心沐智康（杭州）科技有限公司. 保留所有权利.</span>
-            </p>
-        </div>
-    </footer>
-
     <script>
         // 全局变量
         let currentStep = 1;
         let isEnglish = false;
         let healthData = {};
-        
-           // API配置
-        const API_BASE_URL = 'https://xlhyimcljkwe.manus.space/api';
+        let currentPage = 'home';
+
+        // 本地存储管理
+        class HealthDataManager {
+            constructor() {
+                this.storageKey = 'ximory-health-assessments';
+                this.assessments = this.loadAssessments();
+            }
+
+            loadAssessments() {
+                try {
+                    const data = localStorage.getItem(this.storageKey);
+                    return data ? JSON.parse(data) : [];
+                } catch (error) {
+                    console.error('加载评估数据失败:', error);
+                    return [];
+                }
+            }
+
+            saveAssessments() {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(this.assessments));
+                } catch (error) {
+                    console.error('保存评估数据失败:', error);
+                }
+            }
+
+            addAssessment(assessmentData) {
+                const assessment = {
+                    id: Date.now(),
+                    created_at: new Date().toISOString(),
+                    basic_info: assessmentData.basicInfo,
+                    lifestyle: assessmentData.lifestyle,
+                    results: assessmentData.results
+                };
+                
+                this.assessments.unshift(assessment);
+                this.saveAssessments();
+                return assessment;
+            }
+
+            getStatistics() {
+                const total = this.assessments.length;
+                if (total === 0) {
+                    return {
+                        total_assessments: 0,
+                        average_score: 0,
+                        today_stats: {
+                            total_assessments: 0,
+                            score_distribution: { excellent: 0, good: 0, fair: 0, poor: 0 },
+                            age_distribution: { under_30: 0, age_30_50: 0, over_50: 0 }
+                        }
+                    };
+                }
+
+                // 计算平均分
+                const totalScore = this.assessments.reduce((sum, a) => sum + a.results.health_score, 0);
+                const averageScore = Math.round(totalScore / total * 10) / 10;
+
+                // 今日统计
+                const today = new Date().toDateString();
+                const todayAssessments = this.assessments.filter(a => 
+                    new Date(a.created_at).toDateString() === today
+                );
+
+                // 评分分布
+                const scoreDistribution = { excellent: 0, good: 0, fair: 0, poor: 0 };
+                this.assessments.forEach(a => {
+                    const score = a.results.health_score;
+                    if (score >= 80) scoreDistribution.excellent++;
+                    else if (score >= 60) scoreDistribution.good++;
+                    else if (score >= 40) scoreDistribution.fair++;
+                    else scoreDistribution.poor++;
+                });
+
+                // 年龄分布
+                const ageDistribution = { under_30: 0, age_30_50: 0, over_50: 0 };
+                this.assessments.forEach(a => {
+                    const age = a.basic_info.age;
+                    if (age < 30) ageDistribution.under_30++;
+                    else if (age <= 50) ageDistribution.age_30_50++;
+                    else ageDistribution.over_50++;
+                });
+
+                return {
+                    total_assessments: total,
+                    average_score: averageScore,
+                    today_stats: {
+                        total_assessments: todayAssessments.length,
+                        score_distribution: scoreDistribution,
+                        age_distribution: ageDistribution
+                    }
+                };
+            }
+
+            getRecentAssessments(limit = 10) {
+                return this.assessments.slice(0, limit);
+            }
+        }
+
+        // 初始化数据管理器
+        const healthDataManager = new HealthDataManager();
 
         // 页面加载后初始化
         document.addEventListener('DOMContentLoaded', function() {
             console.log('页面加载完成，初始化JavaScript功能');
-            updateStepDisplay();
+            showPage('home');
         });
+
+        // 页面切换函数
+        function showPage(pageId) {
+            // 隐藏所有页面
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 显示指定页面
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = pageId;
+
+                // 如果是数据仪表板页面，刷新数据
+                if (pageId === 'health-dashboard') {
+                    setTimeout(() => refreshDashboard(), 100);
+                }
+
+                // 如果是健康评估页面，重置状态
+                if (pageId === 'health-assessment') {
+                    resetAssessment();
+                }
+            }
+
+            // 关闭移动端菜单
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
 
         // 移动端菜单切换
         function toggleMobileMenu() {
@@ -644,38 +561,50 @@
             }
         }
 
-        // 页面切换
-        function showHome() {
-            const mainContent = document.getElementById('main-content');
-            const healthAssessment = document.getElementById('health-assessment');
-            if (mainContent && healthAssessment) {
-                mainContent.style.display = 'block';
-                healthAssessment.classList.remove('active');
-            }
-        }
-
-        function showHealthAssessment() {
-            const mainContent = document.getElementById('main-content');
-            const healthAssessment = document.getElementById('health-assessment');
-            if (mainContent && healthAssessment) {
-                mainContent.style.display = 'none';
-                healthAssessment.classList.add('active');
-                // 重置评估状态
-                currentStep = 1;
-                healthData = {};
-                updateStepDisplay();
-            }
-        }
-
         // 平滑滚动
         function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+            // 先切换到首页
+            showPage('home');
+            
+            // 等待页面切换完成后滚动
+            setTimeout(() => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
         }
 
-        // 健康评估步骤控制
+        // 语言切换
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const langBtn = document.getElementById('lang-btn');
+            if (langBtn) {
+                langBtn.textContent = isEnglish ? '中' : 'EN';
+            }
+
+            // 更新页面文本
+            const translations = {
+                'hero-title': isEnglish ? 'Empowering Health with Intelligence<br>Illuminating Hearts with Technology' : '用智慧赋能健康<br>让心灵沐浴科技之光',
+                'hero-subtitle': isEnglish ? 'AI Empowerment · Digital Health · Human Care' : 'AI 赋能 · 数字健康 · 人本关怀',
+                'hero-description': isEnglish ? 'Ximory is committed to empowering individual health management with AI, creating user-centered digital health solutions' : '心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案',
+                'assessment-btn': isEnglish ? 'Free Health Assessment' : '免费健康评估',
+                'learn-more-btn': isEnglish ? 'Learn More' : '了解更多'
+            };
+
+            Object.keys(translations).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = translations[id];
+                }
+            });
+        }
+
+        // 健康评估相关函数
         function nextStep() {
             if (currentStep === 1) {
                 // 验证第一步数据
@@ -685,36 +614,19 @@
                 const weight = document.getElementById('weight').value;
 
                 if (!age || !gender || !height || !weight) {
-                    alert(isEnglish ? 'Please fill in all fields' : '请填写所有字段');
+                    alert('请填写完整的基本信息');
                     return;
                 }
 
+                // 保存数据
                 healthData.age = parseInt(age);
                 healthData.gender = gender;
-                healthData.height = parseInt(height);
-                healthData.weight = parseInt(weight);
+                healthData.height = parseFloat(height);
+                healthData.weight = parseFloat(weight);
+                healthData.bmi = calculateBMI(height, weight);
 
                 currentStep = 2;
                 updateStepDisplay();
-            } else if (currentStep === 2) {
-                // 验证第二步数据并提交评估
-                const exercise = document.getElementById('exercise').value;
-                const sleep = document.getElementById('sleep').value;
-                const smoking = document.getElementById('smoking').value;
-                const drinking = document.getElementById('drinking').value;
-
-                if (!exercise || !sleep || !smoking || !drinking) {
-                    alert(isEnglish ? 'Please fill in all fields' : '请填写所有字段');
-                    return;
-                }
-
-                healthData.exercise = exercise;
-                healthData.sleep = sleep;
-                healthData.smoking = smoking;
-                healthData.drinking = drinking;
-
-                // 提交健康评估
-                submitHealthAssessment();
             }
         }
 
@@ -725,128 +637,95 @@
             }
         }
 
-        function restartAssessment() {
-            currentStep = 1;
-            healthData = {};
-            updateStepDisplay();
-            // 清空表单
-            document.getElementById('age').value = '';
-            document.getElementById('gender').value = '';
-            document.getElementById('height').value = '';
-            document.getElementById('weight').value = '';
-            document.getElementById('exercise').value = '';
-            document.getElementById('sleep').value = '';
-            document.getElementById('smoking').value = '';
-            document.getElementById('drinking').value = '';
-        }
-
         function updateStepDisplay() {
             // 隐藏所有步骤
-            document.querySelectorAll('.assessment-step').forEach(step => {
-                step.classList.add('hidden');
-            });
+            for (let i = 1; i <= 3; i++) {
+                const step = document.getElementById(`step-${i}`);
+                if (step) {
+                    step.style.display = 'none';
+                }
+            }
 
             // 显示当前步骤
-            const currentStepElement = document.getElementById(`step${currentStep}`);
+            const currentStepElement = document.getElementById(`step-${currentStep}`);
             if (currentStepElement) {
-                currentStepElement.classList.remove('hidden');
+                currentStepElement.style.display = 'block';
             }
 
             // 更新进度条
             const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
             if (progressBar) {
-                progressBar.style.width = `${(currentStep / 3) * 100}%`;
+                const progress = (currentStep / 3) * 100;
+                progressBar.style.width = progress + '%';
             }
-
-            // 更新步骤标签颜色
-            document.querySelectorAll('[id^="step"][id$="-label"]').forEach((label, index) => {
-                if (index + 1 <= currentStep) {
-                    label.classList.remove('text-gray-400');
-                    label.classList.add('text-blue-600');
-                } else {
-                    label.classList.remove('text-blue-600');
-                    label.classList.add('text-gray-400');
-                }
-            });
-
-            // 更新按钮显示
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const restartBtn = document.getElementById('restart-btn');
-
-            if (prevBtn && nextBtn && restartBtn) {
-                if (currentStep === 1) {
-                    prevBtn.classList.add('hidden');
-                    nextBtn.classList.remove('hidden');
-                    restartBtn.classList.add('hidden');
-                    document.getElementById('next-text').textContent = isEnglish ? 'Next' : '下一步';
-                } else if (currentStep === 2) {
-                    prevBtn.classList.remove('hidden');
-                    nextBtn.classList.remove('hidden');
-                    restartBtn.classList.add('hidden');
-                    document.getElementById('next-text').textContent = isEnglish ? 'Get Results' : '获取结果';
-                } else if (currentStep === 3) {
-                    prevBtn.classList.add('hidden');
-                    nextBtn.classList.add('hidden');
-                    restartBtn.classList.remove('hidden');
-                }
+            
+            if (progressText) {
+                progressText.textContent = `第${currentStep}步，共3步`;
             }
         }
 
-        // 提交健康评估
-        async function submitHealthAssessment() {
-            try {
-                showLoading();
-                
-                // 收集所有评估数据
-                const basicInfo = {
+        function submitAssessment() {
+            // 验证第二步数据
+            const exercise = document.getElementById('exercise').value;
+            const sleep = document.getElementById('sleep').value;
+            const smoking = document.getElementById('smoking').value;
+            const alcohol = document.getElementById('alcohol').value;
+
+            if (!exercise || !sleep || !smoking || !alcohol) {
+                alert('请填写完整的生活习惯信息');
+                return;
+            }
+
+            // 保存数据
+            healthData.exercise = exercise;
+            healthData.sleep = sleep;
+            healthData.smoking = smoking;
+            healthData.alcohol = alcohol;
+
+            // 计算健康评分
+            const results = calculateHealthScore(healthData);
+            
+            // 保存评估记录
+            const assessmentData = {
+                basicInfo: {
                     age: healthData.age,
                     gender: healthData.gender,
                     height: healthData.height,
                     weight: healthData.weight,
-                    bmi: calculateBMI(healthData.height, healthData.weight)
-                };
-                
-                const lifestyle = {
+                    bmi: healthData.bmi
+                },
+                lifestyle: {
                     exercise_frequency: healthData.exercise,
                     sleep_quality: healthData.sleep,
                     smoking: healthData.smoking,
                     alcohol: healthData.alcohol
-                };
-                
-                // 使用本地算法计算健康评分
-                const results = calculateHealthScore(basicInfo, lifestyle);
-                
-                // 保存评估记录到本地存储
-                const assessmentData = {
-                    basicInfo: basicInfo,
-                    lifestyle: lifestyle,
-                    results: results
-                };
-                
-                healthDataManager.addAssessment(assessmentData);
-                
-                // 显示结果
-                showResults(results);
-                currentStep = 3;
-                updateStepDisplay();
-                
-            } catch (error) {
-                console.error('评估失败:', error);
-                alert('评估失败，请重试');
-            } finally {
-                hideLoading();
-            }
+                },
+                results: results
+            };
+            
+            healthDataManager.addAssessment(assessmentData);
+
+            // 显示结果
+            displayResults(results);
+            
+            currentStep = 3;
+            updateStepDisplay();
         }
 
-        // 本地健康评分算法
-        function calculateHealthScore(basicInfo, lifestyle) {
+        function calculateBMI(height, weight) {
+            const heightInMeters = height / 100;
+            return Math.round((weight / (heightInMeters * heightInMeters)) * 10) / 10;
+        }
+
+        function calculateHealthScore(data) {
             let score = 100;
             let riskFactors = [];
             let recommendations = [];
             
             // BMI评估
-            const bmi = basicInfo.bmi;
+            const bmi = data.bmi;
             if (bmi < 18.5) {
                 score -= 15;
                 riskFactors.push('体重偏轻');
@@ -862,16 +741,16 @@
             }
             
             // 年龄因素
-            if (basicInfo.age > 50) {
+            if (data.age > 50) {
                 score -= 5;
                 recommendations.push('建议定期体检，关注慢性疾病预防');
-            } else if (basicInfo.age > 40) {
+            } else if (data.age > 40) {
                 score -= 3;
                 recommendations.push('注意心血管健康，保持良好生活习惯');
             }
             
             // 运动频率
-            switch (lifestyle.exercise_frequency) {
+            switch (data.exercise) {
                 case 'never':
                     score -= 25;
                     riskFactors.push('缺乏运动');
@@ -892,7 +771,7 @@
             }
             
             // 睡眠质量
-            switch (lifestyle.sleep_quality) {
+            switch (data.sleep) {
                 case 'poor':
                     score -= 20;
                     riskFactors.push('睡眠质量差');
@@ -910,14 +789,14 @@
             }
             
             // 吸烟
-            if (lifestyle.smoking === 'yes') {
+            if (data.smoking === 'yes') {
                 score -= 30;
                 riskFactors.push('吸烟');
                 recommendations.push('强烈建议戒烟，寻求专业戒烟帮助');
             }
             
             // 饮酒
-            switch (lifestyle.alcohol) {
+            switch (data.alcohol) {
                 case 'daily':
                     score -= 20;
                     riskFactors.push('过量饮酒');
@@ -963,81 +842,45 @@
             };
         }
 
-        // 添加BMI计算函数
-        function calculateBMI(height, weight) {
-            const heightInMeters = height / 100;
-            return Math.round((weight / (heightInMeters * heightInMeters)) * 10) / 10;
-        }
+        function displayResults(results) {
+            // 更新评分
+            const scoreElement = document.getElementById('health-score');
+            if (scoreElement) {
+                scoreElement.textContent = results.health_score;
+            }
 
-            return {
-                health_score: score,
-                bmi: bmi.toFixed(1),
-                risk_level: score >= 80 ? 'excellent' : score >= 60 ? 'good' : score >= 40 ? 'fair' : 'poor',
-                recommendations: recommendations
-            };
-        }
-
-        // 显示结果
-        function showResults(result) {
-            document.getElementById('health-score').textContent = result.health_score;
-            
-            // 更新评分条颜色
+            // 更新评分条
             const scoreBar = document.getElementById('score-bar');
-            const scoreLevel = document.getElementById('score-level');
-            
             if (scoreBar) {
-                scoreBar.style.width = result.health_score + '%';
-                scoreBar.className = `h-4 rounded-full transition-all duration-500 ${getScoreColor(result.health_score)}`;
+                scoreBar.style.width = results.health_score + '%';
+                scoreBar.className = `h-4 rounded-full score-bar ${getScoreBarColor(results.health_score)}`;
             }
-            
-            if (scoreLevel) {
-                scoreLevel.textContent = getRiskLevelText(result.risk_level);
-                scoreLevel.className = `text-2xl font-semibold mb-4 ${getScoreTextColor(result.health_score)}`;
+
+            // 更新风险等级
+            const scoreLevelElement = document.getElementById('score-level');
+            if (scoreLevelElement) {
+                scoreLevelElement.textContent = getRiskLevelText(results.risk_level);
+                scoreLevelElement.className = `text-2xl font-semibold mb-4 ${getScoreTextColor(results.health_score)}`;
             }
-            
-            // 显示建议
-            const recommendationsHtml = result.recommendations.map(rec => {
-                const bgColor = rec.type === 'success' ? 'bg-green-50 border-green-400' :
-                               rec.type === 'warning' ? 'bg-yellow-50 border-yellow-400' :
-                               rec.type === 'danger' ? 'bg-red-50 border-red-400' :
-                               'bg-blue-50 border-blue-400';
-                const textColor = rec.type === 'success' ? 'text-green-700' :
-                                 rec.type === 'warning' ? 'text-yellow-700' :
-                                 rec.type === 'danger' ? 'text-red-700' :
-                                 'text-blue-700';
-                
-                return `<div class="${bgColor} border-l-4 p-4 mb-3">
-                    <h4 class="${textColor} font-semibold">${rec.title}</h4>
-                    <p class="${textColor}">${rec.content}</p>
-                </div>`;
-            }).join('');
-            
+
+            // 更新建议
             const recommendationsElement = document.getElementById('recommendations');
             if (recommendationsElement) {
-                recommendationsElement.innerHTML = recommendationsHtml;
+                recommendationsElement.innerHTML = results.recommendations.map(rec => 
+                    `<div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <p class="text-blue-800">${rec}</p>
+                    </div>`
+                ).join('');
             }
         }
 
-        // 获取风险等级文本
-        function getRiskLevelText(level) {
-            switch (level) {
-                case 'excellent': return '优秀';
-                case 'good': return '良好';
-                case 'fair': return '一般';
-                case 'poor': return '需改善';
-                default: return '未知';
-            }
+        function getScoreBarColor(score) {
+            if (score >= 80) return 'bg-gradient-to-r from-green-400 to-green-600';
+            if (score >= 60) return 'bg-gradient-to-r from-blue-400 to-blue-600';
+            if (score >= 40) return 'bg-gradient-to-r from-yellow-400 to-yellow-600';
+            return 'bg-gradient-to-r from-red-400 to-red-600';
         }
 
-        // 获取评分颜色
-        function getScoreColor(score) {
-            if (score >= 80) return 'bg-green-500';
-            if (score >= 60) return 'bg-blue-500';
-            if (score >= 40) return 'bg-yellow-500';
-            return 'bg-red-500';
-        }
-
-        // 获取评分文字颜色
         function getScoreTextColor(score) {
             if (score >= 80) return 'text-green-600';
             if (score >= 60) return 'text-blue-600';
@@ -1045,236 +888,69 @@
             return 'text-red-600';
         }
 
-        // 显示加载状态
-        function showLoading() {
-            const nextBtn = document.getElementById('next-btn');
-            if (nextBtn) {
-                nextBtn.disabled = true;
-                nextBtn.innerHTML = '<span>评估中...</span>';
+        function getRiskLevelText(level) {
+            switch (level) {
+                case 'excellent': return '健康状况优秀';
+                case 'good': return '健康状况良好';
+                case 'fair': return '健康状况一般';
+                case 'poor': return '需要改善健康状况';
+                default: return '健康状况未知';
             }
         }
 
-        // 隐藏加载状态
-        function hideLoading() {
-            const nextBtn = document.getElementById('next-btn');
-            if (nextBtn) {
-                nextBtn.disabled = false;
-                nextBtn.innerHTML = '<span id="next-text">获取结果</span>';
-            }
-        }
-
-        // 语言切换
-        function toggleLanguage() {
-            isEnglish = !isEnglish;
-            updateLanguage();
-        }
-
-        function updateLanguage() {
-            const langBtn = document.getElementById('lang-btn');
-            if (langBtn) {
-                langBtn.textContent = isEnglish ? '中文' : 'EN';
-            }
-
-            // 更新所有文本内容
-            const translations = {
-                'hero-title': isEnglish ? 'Empowering Health with Intelligence<br>Bathing Hearts in the Light of Technology' : '用智慧赋能健康<br>让心灵沐浴科技之光',
-                'hero-subtitle': isEnglish ? 'AI Empowerment · Digital Health · Human Care' : 'AI 赋能 · 数字健康 · 人本关怀',
-                'hero-description': isEnglish ? 'Ximory is committed to empowering individual health management with AI, creating user-centered digital health solutions' : '心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案',
-                'assessment-btn': isEnglish ? 'Free Health Assessment' : '免费健康评估',
-                'learn-more-btn': isEnglish ? 'Learn More' : '了解更多'
-            };
-
-            // 更新所有翻译
-            Object.keys(translations).forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.innerHTML = translations[id];
-                }
+        function resetAssessment() {
+            currentStep = 1;
+            healthData = {};
+            
+            // 清空表单
+            const inputs = document.querySelectorAll('#health-assessment input, #health-assessment select');
+            inputs.forEach(input => {
+                input.value = '';
             });
+            
+            updateStepDisplay();
         }
 
-        // 显示数据仪表板页面
-        function openDashboard() {
-            // 隐藏所有页面
-            document.getElementById('home').classList.remove('active');
-            document.getElementById('health-assessment').classList.remove('active');
-            document.getElementById('health-dashboard').classList.remove('active');
-            
-            // 显示数据仪表板页面
-            document.getElementById('health-dashboard').classList.add('active');
-            
-            // 滚动到页面顶部
-            window.scrollTo(0, 0);
-            
-            // 加载仪表板数据
-            loadDashboardData();
-        }
-
-        // 本地数据存储管理
-        class HealthDataManager {
-            constructor() {
-                this.storageKey = 'ximory_health_assessments';
-                this.loadData();
-            }
-
-            // 加载本地数据
-            loadData() {
-                const stored = localStorage.getItem(this.storageKey);
-                this.assessments = stored ? JSON.parse(stored) : [];
-            }
-
-            // 保存数据到本地存储
-            saveData() {
-                localStorage.setItem(this.storageKey, JSON.stringify(this.assessments));
-            }
-
-            // 添加新的评估记录
-            addAssessment(assessmentData) {
-                const assessment = {
-                    id: Date.now().toString(),
-                    created_at: new Date().toISOString(),
-                    basic_info: assessmentData.basicInfo,
-                    lifestyle: assessmentData.lifestyle,
-                    results: assessmentData.results
-                };
-                
-                this.assessments.unshift(assessment); // 添加到开头
-                this.saveData();
-                return assessment;
-            }
-
-            // 获取所有评估记录
-            getAllAssessments() {
-                return this.assessments;
-            }
-
-            // 获取统计数据
-            getStatistics() {
-                const total = this.assessments.length;
-                if (total === 0) {
-                    return {
-                        total_assessments: 0,
-                        average_score: 0,
-                        today_stats: {
-                            total_assessments: 0,
-                            score_distribution: { excellent: 0, good: 0, fair: 0, poor: 0 },
-                            age_distribution: { under_30: 0, age_30_50: 0, over_50: 0 }
-                        }
-                    };
-                }
-
-                // 计算平均分
-                const totalScore = this.assessments.reduce((sum, a) => sum + a.results.health_score, 0);
-                const averageScore = Math.round(totalScore / total * 10) / 10;
-
-                // 今日统计
-                const today = new Date().toDateString();
-                const todayAssessments = this.assessments.filter(a => 
-                    new Date(a.created_at).toDateString() === today
-                );
-
-                // 评分分布
-                const scoreDistribution = { excellent: 0, good: 0, fair: 0, poor: 0 };
-                todayAssessments.forEach(a => {
-                    const score = a.results.health_score;
-                    if (score >= 80) scoreDistribution.excellent++;
-                    else if (score >= 60) scoreDistribution.good++;
-                    else if (score >= 40) scoreDistribution.fair++;
-                    else scoreDistribution.poor++;
-                });
-
-                // 年龄分布
-                const ageDistribution = { under_30: 0, age_30_50: 0, over_50: 0 };
-                todayAssessments.forEach(a => {
-                    const age = a.basic_info.age;
-                    if (age < 30) ageDistribution.under_30++;
-                    else if (age <= 50) ageDistribution.age_30_50++;
-                    else ageDistribution.over_50++;
-                });
-
-                return {
-                    total_assessments: total,
-                    average_score: averageScore,
-                    today_stats: {
-                        total_assessments: todayAssessments.length,
-                        score_distribution: scoreDistribution,
-                        age_distribution: ageDistribution
-                    }
-                };
-            }
-
-            // 获取最近的评估记录
-            getRecentAssessments(limit = 10) {
-                return this.assessments.slice(0, limit);
-            }
-        }
-
-        // 初始化数据管理器
-        const healthDataManager = new HealthDataManager();
-
-        // 显示数据仪表板页面
-        function openDashboard() {
-            // 隐藏所有页面
-            document.getElementById('home').classList.remove('active');
-            document.getElementById('health-assessment').classList.remove('active');
-            document.getElementById('health-dashboard').classList.remove('active');
-            
-            // 显示数据仪表板页面
-            document.getElementById('health-dashboard').classList.add('active');
-            
-            // 滚动到页面顶部
-            window.scrollTo(0, 0);
-            
-            // 加载仪表板数据
-            loadDashboardData();
-        }
-
-        // 加载数据仪表板数据（完全前端化）
-        function loadDashboardData() {
-            // 获取本地统计数据
+        // 数据仪表板相关函数
+        function refreshDashboard() {
             const stats = healthDataManager.getStatistics();
-            
+            const recentAssessments = healthDataManager.getRecentAssessments(10);
+
             // 更新统计卡片
             updateDashboardStats(stats);
             
             // 更新图表
             updateDashboardCharts(stats);
             
-            // 加载最近评估记录
-            const recentAssessments = healthDataManager.getRecentAssessments(10);
+            // 更新表格
             updateDashboardTable(recentAssessments);
         }
 
-        // 更新统计卡片
-        function updateDashboardStats(data) {
-            document.getElementById('dashboard-total-assessments').textContent = data.total_assessments;
-            document.getElementById('dashboard-average-score').textContent = data.average_score;
+        function updateDashboardStats(stats) {
+            document.getElementById('total-assessments').textContent = stats.total_assessments;
+            document.getElementById('average-score').textContent = stats.average_score;
+            document.getElementById('today-assessments').textContent = stats.today_stats.total_assessments;
             
-            const todayStats = data.today_stats;
-            document.getElementById('dashboard-today-assessments').textContent = todayStats.total_assessments;
-            
-            const excellentRatio = todayStats.total_assessments > 0 
-                ? Math.round((todayStats.score_distribution.excellent / todayStats.total_assessments) * 100) + '%'
-                : '0%';
-            document.getElementById('dashboard-excellent-ratio').textContent = excellentRatio;
+            const excellentCount = stats.today_stats.score_distribution.excellent;
+            const total = stats.total_assessments;
+            const excellentPercentage = total > 0 ? Math.round((excellentCount / total) * 100) : 0;
+            document.getElementById('excellent-percentage').textContent = excellentPercentage + '%';
         }
 
-        // 更新图表
-        function updateDashboardCharts(data) {
-            const todayStats = data.today_stats;
-            updateDashboardScoreChart(todayStats.score_distribution);
-            updateDashboardAgeChart(todayStats.age_distribution);
+        function updateDashboardCharts(stats) {
+            updateScoreChart(stats.today_stats.score_distribution);
+            updateAgeChart(stats.today_stats.age_distribution);
         }
 
-        // 评分分布图
-        function updateDashboardScoreChart(distribution) {
-            const ctx = document.getElementById('dashboard-score-chart').getContext('2d');
-            
-            if (window.dashboardScoreChart) {
-                window.dashboardScoreChart.destroy();
+        function updateScoreChart(distribution) {
+            const ctx = document.getElementById('score-chart');
+            if (!ctx) return;
+
+            if (window.scoreChart) {
+                window.scoreChart.destroy();
             }
-            
-            window.dashboardScoreChart = new Chart(ctx, {
+
+            window.scoreChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: ['优秀 (80+)', '良好 (60-79)', '一般 (40-59)', '需改善 (<40)'],
@@ -1285,12 +961,7 @@
                             distribution.fair || 0,
                             distribution.poor || 0
                         ],
-                        backgroundColor: [
-                            '#10B981',
-                            '#3B82F6',
-                            '#F59E0B',
-                            '#EF4444'
-                        ]
+                        backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444']
                     }]
                 },
                 options: {
@@ -1305,15 +976,15 @@
             });
         }
 
-        // 年龄分布图
-        function updateDashboardAgeChart(distribution) {
-            const ctx = document.getElementById('dashboard-age-chart').getContext('2d');
-            
-            if (window.dashboardAgeChart) {
-                window.dashboardAgeChart.destroy();
+        function updateAgeChart(distribution) {
+            const ctx = document.getElementById('age-chart');
+            if (!ctx) return;
+
+            if (window.ageChart) {
+                window.ageChart.destroy();
             }
-            
-            window.dashboardAgeChart = new Chart(ctx, {
+
+            window.ageChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['30岁以下', '30-50岁', '50岁以上'],
@@ -1347,9 +1018,10 @@
             });
         }
 
-        // 更新评估记录表格
         function updateDashboardTable(assessments) {
-            const tbody = document.getElementById('dashboard-assessment-table');
+            const tbody = document.getElementById('assessment-table');
+            if (!tbody) return;
+
             tbody.innerHTML = '';
             
             if (!assessments || assessments.length === 0) {
@@ -1387,7 +1059,6 @@
             });
         }
 
-        // 获取评分颜色
         function getScoreColor(score) {
             if (score >= 80) return 'bg-green-100 text-green-800';
             if (score >= 60) return 'bg-blue-100 text-blue-800';
@@ -1395,7 +1066,6 @@
             return 'bg-red-100 text-red-800';
         }
 
-        // 获取风险等级颜色
         function getRiskColor(level) {
             switch (level) {
                 case 'excellent': return 'bg-green-100 text-green-800';
@@ -1406,7 +1076,6 @@
             }
         }
 
-        // 获取风险等级文本
         function getRiskText(level) {
             switch (level) {
                 case 'excellent': return '优秀';
