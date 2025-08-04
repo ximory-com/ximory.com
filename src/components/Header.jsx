@@ -43,7 +43,7 @@ const Header = ({ currentPage, showPage, isEnglish, toggleLanguage }) => {
             <img 
               src="/logo_horizontal.png" 
               alt="心沐智康 Ximory" 
-              className="h-10 w-auto cursor-pointer"
+              className="h-12 w-auto cursor-pointer"
               onClick={() => showPage('home')}
             />
           </div>
