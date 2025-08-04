@@ -1,0 +1,38 @@
+{
+  "name": "ximory-health-frontend",
+  "version": "1.0.0",
+  "description": "心沐智康 AI健康评估前端系统",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'Static HTML project, no build needed'",
+    "preview": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "ai",
+    "health",
+    "assessment",
+    "frontend",
+    "javascript",
+    "html",
+    "css",
+    "tailwind"
+  ],
+  "author": "心沐智康（杭州）科技有限公司",
+  "license": "MIT",
+  "homepage": "https://trjajjgl.manus.space",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/ximory-health-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/ximory-health-frontend/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
+
