@@ -37,7 +37,7 @@
                     <a href="#solutions" onclick="scrollToSection('solutions')" class="text-gray-700 hover:text-blue-600 font-medium">解决方案</a>
                     <a href="#" onclick="showHealthAssessment()" class="text-gray-700 hover:text-blue-600 font-medium">健康评估</a>
                     <a href="#contact" onclick="scrollToSection('contact')" class="text-gray-700 hover:text-blue-600 font-medium">联系我们</a>
-                    <a href="https://mzhyi8cdqyg0.manus.space/health-dashboard.html" target="_blank" class="text-gray-700 hover:text-blue-600 font-medium">数据仪表板</a>
+                    <a href="#" onclick="openDashboard()" class="text-gray-700 hover:text-blue-600 font-medium">数据仪表板</a>
                 </div>
                 
                 <!-- 语言切换和移动端菜单 -->
@@ -62,7 +62,7 @@
                     <a href="#solutions" onclick="scrollToSection('solutions'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">解决方案</a>
                     <a href="#" onclick="showHealthAssessment(); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">健康评估</a>
                     <a href="#contact" onclick="scrollToSection('contact'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">联系我们</a>
-                    <a href="https://mzhyi8cdqyg0.manus.space/health-dashboard.html" target="_blank" class="block px-3 py-2 text-gray-700 hover:text-blue-600">数据仪表板</a>
+                    <a href="#" onclick="openDashboard()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">数据仪表板</a>
                 </div>
             </div>
         </div>
@@ -492,8 +492,8 @@
         let isEnglish = false;
         let healthData = {};
         
-        // API基础URL - 指向后端服务
-        const API_BASE_URL = 'https://mzhyi8cdqyg0.manus.space/api';
+           // API配置
+        const API_BASE_URL = 'https://xlhyimcljkwe.manus.space/api';
 
         // 页面加载后初始化
         document.addEventListener('DOMContentLoaded', function() {
@@ -877,6 +877,21 @@
                     element.innerHTML = translations[id];
                 }
             });
+        }
+
+        // 打开数据仪表板，处理跨域问题
+        function openDashboard() {
+            // 尝试在新窗口中打开数据仪表板
+            const dashboardUrl = 'https://xlhyimcljkwe.manus.space/health-dashboard.html';
+            
+            // 创建一个新窗口
+            const dashboardWindow = window.open(dashboardUrl, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+            
+            // 如果窗口被阻止，提供备用方案
+            if (!dashboardWindow) {
+                // 如果弹窗被阻止，直接跳转
+                window.location.href = dashboardUrl;
+            }
         }
     </script>
 </body>
