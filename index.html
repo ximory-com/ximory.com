@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心沐智康 - AI赋能健康科技 | Ximory Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-logo { height: 128px; }
+        .nav-logo { height: 48px; }
+        .gradient-bg { background: linear-gradient(135deg, #e0f2fe 0%, #f5f5f5 50%, #e8f5e8 100%); }
+        .health-assessment { display: none; }
+        .health-assessment.active { display: block; }
+        .progress-bar { transition: width 0.3s ease; }
+        .score-bar { transition: width 1s ease; }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- LOGO -->
+                <div class="flex items-center">
+                    <img src="logo_horizontal.png" alt="心沐智康" class="nav-logo">
+                </div>
+                
+                <!-- 桌面端导航菜单 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" onclick="showHome()" class="text-gray-700 hover:text-blue-600 font-medium">首页</a>
+                    <a href="#about" onclick="scrollToSection('about')" class="text-gray-700 hover:text-blue-600 font-medium">关于我们</a>
+                    <a href="#services" onclick="scrollToSection('services')" class="text-gray-700 hover:text-blue-600 font-medium">产品与服务</a>
+                    <a href="#solutions" onclick="scrollToSection('solutions')" class="text-gray-700 hover:text-blue-600 font-medium">解决方案</a>
+                    <a href="#" onclick="showHealthAssessment()" class="text-gray-700 hover:text-blue-600 font-medium">健康评估</a>
+                    <a href="#contact" onclick="scrollToSection('contact')" class="text-gray-700 hover:text-blue-600 font-medium">联系我们</a>
+                </div>
+                
+                <!-- 语言切换和移动端菜单 -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleLanguage()" class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200">
+                        <span id="lang-btn">EN</span>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#" onclick="showHome(); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">首页</a>
+                    <a href="#about" onclick="scrollToSection('about'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">关于我们</a>
+                    <a href="#services" onclick="scrollToSection('services'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">产品与服务</a>
+                    <a href="#solutions" onclick="scrollToSection('solutions'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">解决方案</a>
+                    <a href="#" onclick="showHealthAssessment(); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">健康评估</a>
+                    <a href="#contact" onclick="scrollToSection('contact'); toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:text-blue-600">联系我们</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主页内容 -->
+    <div id="main-content">
+        <!-- Hero Section -->
+        <section class="text-center py-20">
+            <div class="max-w-4xl mx-auto px-4">
+                <img src="logo_vertical.jpg" alt="心沐智康" class="hero-logo mx-auto mb-8">
+                
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
+                    <span id="hero-title">用智慧赋能健康<br>让心灵沐浴科技之光</span>
+                </h1>
+                
+                <p class="text-xl text-gray-600 mb-8">
+                    <span id="hero-subtitle">AI 赋能 · 数字健康 · 人本关怀</span>
+                </p>
+                
+                <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+                    <span id="hero-description">心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案</span>
+                </p>
+                
+                <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+                    <button onclick="showHealthAssessment()" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-green-700 transition-all">
+                        <span id="assessment-btn">免费健康评估</span>
+                    </button>
+                    <button onclick="scrollToSection('about')" class="w-full sm:w-auto bg-white text-gray-700 px-8 py-3 rounded-lg font-medium border border-gray-300 hover:bg-gray-50 transition-all">
+                        <span id="learn-more-btn">了解更多</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我们 -->
+        <section id="about" class="py-20 bg-white/50">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                    <span id="about-title">关于我们</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">
+                            <span id="brand-vision-title">品牌愿景</span>
+                        </h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            <span id="brand-vision-content">让智慧与心灵共生，赋能每一个生命真实成长。我们相信健康不仅是身体无恙，更是身心灵的和谐共鸣。</span>
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">
+                            <span id="core-values-title">核心价值</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">
+                                        <span id="value1-title">人本关怀</span>
+                                    </h4>
+                                    <p class="text-gray-600 text-sm">
+                                        <span id="value1-desc">以人为本，关注每个个体的真实需求</span>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">
+                                        <span id="value2-title">AI 赋能</span>
+                                    </h4>
+                                    <p class="text-gray-600 text-sm">
+                                        <span id="value2-desc">运用人工智能技术提升健康管理效率</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 产品与服务 -->
+        <section id="services" class="py-20">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                    <span id="services-title">产品与服务</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                            <span id="service1-title">AI健康评估</span>
+                        </h3>
+                        <p class="text-gray-600">
+                            <span id="service1-desc">基于人工智能的个性化健康风险评估和预测</span>
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                            <span id="service2-title">数字健康管理</span>
+                        </h3>
+                        <p class="text-gray-600">
+                            <span id="service2-desc">全方位的数字化健康数据管理和分析平台</span>
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                            <span id="service3-title">健康教育</span>
+                        </h3>
+                        <p class="text-gray-600">
+                            <span id="service3-desc">个性化的健康知识推送和生活方式指导</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 解决方案 -->
+        <section id="solutions" class="py-20 bg-white/50">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                    <span id="solutions-title">解决方案</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                            <span id="solution1-title">个人健康管理</span>
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            <span id="solution1-desc">为个人用户提供全面的健康数据收集、分析和管理服务，帮助用户更好地了解和管理自己的健康状况。</span>
+                        </p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="solution1-feature1">健康数据实时监测</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="solution1-feature2">个性化健康建议</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="solution1-feature3">健康风险预警</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                            <span id="solution2-title">企业健康服务</span>
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            <span id="solution2-desc">为企业提供员工健康管理解决方案，提升员工健康水平，降低企业医疗成本。</span>
+                        </p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="solution2-feature1">员工健康体检</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="solution2-feature2">健康数据分析</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="solution2-feature3">健康培训课程</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我们 -->
+        <section id="contact" class="py-20">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                    <span id="contact-title">联系我们</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">
+                            <span id="contact-info-title">联系方式</span>
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-gray-800">
+                                        <span id="contact-email-label">企业邮箱</span>
+                                    </p>
+                                    <a href="mailto:contact@ximory.com" class="text-blue-600 hover:text-blue-800">contact@ximory.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-gray-800">
+                                        <span id="contact-support-label">技术支持</span>
+                                    </p>
+                                    <a href="mailto:support@ximory.com" class="text-blue-600 hover:text-blue-800">support@ximory.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-gray-800">
+                                        <span id="contact-ceo-label">创始人邮箱</span>
+                                    </p>
+                                    <a href="mailto:ceo@ximory.com" class="text-blue-600 hover:text-blue-800">ceo@ximory.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-medium text-gray-800">
+                                        <span id="contact-app-label">开发专用</span>
+                                    </p>
+                                    <a href="mailto:app@ximory.com" class="text-blue-600 hover:text-blue-800">app@ximory.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">
+                            <span id="business-cooperation-title">商务合作咨询</span>
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            <span id="business-cooperation-desc">如果您对我们的产品和服务感兴趣，或希望与我们建立合作关系，请通过以下方式联系我们。</span>
+                        </p>
+                        
+                        <div class="bg-blue-50 rounded-lg p-6">
+                            <h4 class="font-semibold text-gray-800 mb-3">
+                                <span id="cooperation-methods-title">合作方式</span>
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• <span id="cooperation-method1">技术合作与集成</span></li>
+                                <li>• <span id="cooperation-method2">渠道合作与推广</span></li>
+                                <li>• <span id="cooperation-method3">定制化解决方案</span></li>
+                                <li>• <span id="cooperation-method4">投资与战略合作</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- AI健康评估页面 -->
+    <div id="health-assessment" class="health-assessment min-h-screen py-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <!-- 返回按钮 -->
+                <button onclick="showHome()" class="mb-6 flex items-center text-gray-600 hover:text-gray-800">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span id="back-btn">返回首页</span>
+                </button>
+                
+                <!-- 标题 -->
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                        <span id="assessment-title">AI健康评估</span>
+                    </h1>
+                    <p class="text-gray-600">
+                        <span id="assessment-subtitle">获得AI驱动的个性化健康洞察</span>
+                    </p>
+                </div>
+
+                <!-- 进度条 -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-blue-600" id="step1-label">基本信息</span>
+                        <span class="text-sm font-medium text-gray-400" id="step2-label">生活习惯</span>
+                        <span class="text-sm font-medium text-gray-400" id="step3-label">评估结果</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 33%"></div>
+                    </div>
+                </div>
+
+                <!-- 步骤1: 基本信息 -->
+                <div id="step1" class="assessment-step">
+                    <h2 class="text-xl font-semibold mb-6">
+                        <span id="basic-info-title">基本信息</span>
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="age-label">年龄</span>
+                            </label>
+                            <input type="number" id="age" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="请输入年龄">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="gender-label">性别</span>
+                            </label>
+                            <select id="gender" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">请选择性别</option>
+                                <option value="male">男</option>
+                                <option value="female">女</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="height-label">身高 (厘米)</span>
+                            </label>
+                            <input type="number" id="height" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="请输入身高">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="weight-label">体重 (公斤)</span>
+                            </label>
+                            <input type="number" id="weight" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="请输入体重">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 步骤2: 生活习惯 -->
+                <div id="step2" class="assessment-step hidden">
+                    <h2 class="text-xl font-semibold mb-6">
+                        <span id="lifestyle-title">生活习惯</span>
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="exercise-label">运动频率</span>
+                            </label>
+                            <select id="exercise" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">请选择频率</option>
+                                <option value="daily">每天</option>
+                                <option value="weekly">每周</option>
+                                <option value="monthly">每月</option>
+                                <option value="never">从不</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="sleep-label">睡眠质量</span>
+                            </label>
+                            <select id="sleep" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">请选择质量</option>
+                                <option value="excellent">优秀</option>
+                                <option value="good">良好</option>
+                                <option value="fair">一般</option>
+                                <option value="poor">较差</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="smoking-label">吸烟</span>
+                            </label>
+                            <select id="smoking" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">请选择</option>
+                                <option value="yes">是</option>
+                                <option value="no">否</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <span id="drinking-label">饮酒</span>
+                            </label>
+                            <select id="drinking" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">请选择频率</option>
+                                <option value="never">从不</option>
+                                <option value="light">偶尔</option>
+                                <option value="moderate">适量</option>
+                                <option value="heavy">经常</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 步骤3: 评估结果 -->
+                <div id="step3" class="assessment-step hidden">
+                    <div class="text-center space-y-6">
+                        <h2 class="text-2xl font-semibold mb-6">
+                            <span id="results-title">您的健康评估结果</span>
+                        </h2>
+                        
+                        <div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-8">
+                            <div class="text-6xl font-bold mb-4">
+                                <span id="health-score" class="text-blue-600">85</span>
+                                <span class="text-gray-400 text-3xl">/100</span>
+                            </div>
+                            
+                            <div id="score-level" class="text-2xl font-semibold mb-4 text-blue-600">
+                                优秀
+                            </div>
+                            
+                            <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+                                <div id="score-bar" class="score-bar h-4 rounded-full bg-blue-500" style="width: 85%"></div>
+                            </div>
+
+                            <div class="text-gray-600 mb-6">
+                                <span id="recommendations-intro">根据您的回答，以下是一些建议：</span>
+                            </div>
+
+                            <div id="recommendations" class="text-left space-y-2 text-sm">
+                                <!-- 建议内容将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按钮 -->
+                <div class="flex justify-between mt-8">
+                    <button id="prev-btn" onclick="prevStep()" class="px-6 py-3 bg-gray-500 text-white rounded-lg font-medium hover:bg-gray-600 hidden">
+                        <span id="prev-text">上一步</span>
+                    </button>
+
+                    <button id="next-btn" onclick="nextStep()" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 ml-auto">
+                        <span id="next-text">下一步</span>
+                    </button>
+
+                    <button id="restart-btn" onclick="restartAssessment()" class="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 hidden">
+                        <span id="restart-text">重新评估</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-4">
+                <span class="text-2xl font-bold">XIMORY</span>
+            </div>
+            <p class="text-gray-400">
+                <span id="footer-text">© 2025 心沐智康（杭州）科技有限公司. 保留所有权利.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 全局变量
+        let currentStep = 1;
+        let isEnglish = false;
+        let healthData = {};
+
+        // 语言切换
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const langBtn = document.getElementById('lang-btn');
+            langBtn.textContent = isEnglish ? '中文' : 'EN';
+
+            // 更新所有文本内容
+            const translations = {
+                'hero-title': isEnglish ? 'Empowering Health with Intelligence<br>Bathing Hearts in the Light of Technology' : '用智慧赋能健康<br>让心灵沐浴科技之光',
+                'hero-subtitle': isEnglish ? 'AI Empowerment · Digital Health · Human Care' : 'AI 赋能 · 数字健康 · 人本关怀',
+                'hero-description': isEnglish ? 'Ximory is committed to empowering individual health management with AI, creating user-centered digital health solutions' : '心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案',
+                'assessment-btn': isEnglish ? 'Free Health Assessment' : '免费健康评估',
+                'learn-more-btn': isEnglish ? 'Learn More' : '了解更多',
+                'about-title': isEnglish ? 'About Us' : '关于我们',
+                'brand-vision-title': isEnglish ? 'Brand Vision' : '品牌愿景',
+                'brand-vision-content': isEnglish ? 'Let wisdom and soul coexist, empowering every life to grow authentically. We believe health is not just physical well-being, but the harmonious resonance of body, mind, and spirit.' : '让智慧与心灵共生，赋能每一个生命真实成长。我们相信健康不仅是身体无恙，更是身心灵的和谐共鸣。',
+                'core-values-title': isEnglish ? 'Core Values' : '核心价值',
+                'value1-title': isEnglish ? 'Human Care' : '人本关怀',
+                'value1-desc': isEnglish ? 'People-oriented, focusing on the real needs of each individual' : '以人为本，关注每个个体的真实需求',
+                'value2-title': isEnglish ? 'AI Empowerment' : 'AI 赋能',
+                'value2-desc': isEnglish ? 'Using artificial intelligence technology to improve health management efficiency' : '运用人工智能技术提升健康管理效率',
+                'services-title': isEnglish ? 'Products & Services' : '产品与服务',
+                'service1-title': isEnglish ? 'AI Health Assessment' : 'AI健康评估',
+                'service1-desc': isEnglish ? 'Personalized health risk assessment and prediction based on artificial intelligence' : '基于人工智能的个性化健康风险评估和预测',
+                'service2-title': isEnglish ? 'Digital Health Management' : '数字健康管理',
+                'service2-desc': isEnglish ? 'Comprehensive digital health data management and analysis platform' : '全方位的数字化健康数据管理和分析平台',
+                'service3-title': isEnglish ? 'Health Education' : '健康教育',
+                'service3-desc': isEnglish ? 'Personalized health knowledge delivery and lifestyle guidance' : '个性化的健康知识推送和生活方式指导',
+                'solutions-title': isEnglish ? 'Solutions' : '解决方案',
+                'solution1-title': isEnglish ? 'Personal Health Management' : '个人健康管理',
+                'solution1-desc': isEnglish ? 'Provide comprehensive health data collection, analysis and management services for individual users, helping users better understand and manage their health status.' : '为个人用户提供全面的健康数据收集、分析和管理服务，帮助用户更好地了解和管理自己的健康状况。',
+                'solution1-feature1': isEnglish ? 'Real-time health data monitoring' : '健康数据实时监测',
+                'solution1-feature2': isEnglish ? 'Personalized health recommendations' : '个性化健康建议',
+                'solution1-feature3': isEnglish ? 'Health risk alerts' : '健康风险预警',
+                'solution2-title': isEnglish ? 'Enterprise Health Services' : '企业健康服务',
+                'solution2-desc': isEnglish ? 'Provide employee health management solutions for enterprises, improve employee health levels, and reduce corporate medical costs.' : '为企业提供员工健康管理解决方案，提升员工健康水平，降低企业医疗成本。',
+                'solution2-feature1': isEnglish ? 'Employee health checkups' : '员工健康体检',
+                'solution2-feature2': isEnglish ? 'Health data analysis' : '健康数据分析',
+                'solution2-feature3': isEnglish ? 'Health training courses' : '健康培训课程',
+                'contact-title': isEnglish ? 'Contact Us' : '联系我们',
+                'contact-info-title': isEnglish ? 'Contact Information' : '联系方式',
+                'contact-email-label': isEnglish ? 'Business Email' : '企业邮箱',
+                'contact-support-label': isEnglish ? 'Technical Support' : '技术支持',
+                'contact-ceo-label': isEnglish ? 'CEO Email' : '创始人邮箱',
+                'contact-app-label': isEnglish ? 'Development' : '开发专用',
+                'business-cooperation-title': isEnglish ? 'Business Cooperation' : '商务合作咨询',
+                'business-cooperation-desc': isEnglish ? 'If you are interested in our products and services, or wish to establish a partnership with us, please contact us through the following methods.' : '如果您对我们的产品和服务感兴趣，或希望与我们建立合作关系，请通过以下方式联系我们。',
+                'cooperation-methods-title': isEnglish ? 'Cooperation Methods' : '合作方式',
+                'cooperation-method1': isEnglish ? 'Technical cooperation and integration' : '技术合作与集成',
+                'cooperation-method2': isEnglish ? 'Channel cooperation and promotion' : '渠道合作与推广',
+                'cooperation-method3': isEnglish ? 'Customized solutions' : '定制化解决方案',
+                'cooperation-method4': isEnglish ? 'Investment and strategic cooperation' : '投资与战略合作',
+                'footer-text': isEnglish ? '© 2025 Ximory Technology (Hangzhou) Co., Ltd. All rights reserved.' : '© 2025 心沐智康（杭州）科技有限公司. 保留所有权利.',
+                'back-btn': isEnglish ? 'Back to Home' : '返回首页',
+                'assessment-title': isEnglish ? 'AI Health Assessment' : 'AI健康评估',
+                'assessment-subtitle': isEnglish ? 'Get personalized health insights powered by AI' : '获得AI驱动的个性化健康洞察',
+                'step1-label': isEnglish ? 'Basic Information' : '基本信息',
+                'step2-label': isEnglish ? 'Lifestyle' : '生活习惯',
+                'step3-label': isEnglish ? 'Results' : '评估结果',
+                'basic-info-title': isEnglish ? 'Basic Information' : '基本信息',
+                'age-label': isEnglish ? 'Age' : '年龄',
+                'gender-label': isEnglish ? 'Gender' : '性别',
+                'height-label': isEnglish ? 'Height (cm)' : '身高 (厘米)',
+                'weight-label': isEnglish ? 'Weight (kg)' : '体重 (公斤)',
+                'lifestyle-title': isEnglish ? 'Lifestyle Habits' : '生活习惯',
+                'exercise-label': isEnglish ? 'Exercise Frequency' : '运动频率',
+                'sleep-label': isEnglish ? 'Sleep Quality' : '睡眠质量',
+                'smoking-label': isEnglish ? 'Smoking' : '吸烟',
+                'drinking-label': isEnglish ? 'Alcohol Consumption' : '饮酒',
+                'results-title': isEnglish ? 'Your Health Assessment Results' : '您的健康评估结果',
+                'recommendations-intro': isEnglish ? 'Based on your responses, here are some recommendations:' : '根据您的回答，以下是一些建议：',
+                'prev-text': isEnglish ? 'Previous' : '上一步',
+                'next-text': isEnglish ? 'Next' : '下一步',
+                'restart-text': isEnglish ? 'Take Again' : '重新评估'
+            };
+
+            // 更新所有翻译
+            Object.keys(translations).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = translations[id];
+                }
+            });
+
+            // 更新表单选项
+            updateFormOptions();
+        }
+
+        function updateFormOptions() {
+            // 更新性别选项
+            const genderSelect = document.getElementById('gender');
+            if (genderSelect) {
+                genderSelect.innerHTML = isEnglish ? 
+                    '<option value="">Select gender</option><option value="male">Male</option><option value="female">Female</option>' :
+                    '<option value="">请选择性别</option><option value="male">男</option><option value="female">女</option>';
+            }
+
+            // 更新运动频率选项
+            const exerciseSelect = document.getElementById('exercise');
+            if (exerciseSelect) {
+                exerciseSelect.innerHTML = isEnglish ?
+                    '<option value="">Select frequency</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="never">Never</option>' :
+                    '<option value="">请选择频率</option><option value="daily">每天</option><option value="weekly">每周</option><option value="monthly">每月</option><option value="never">从不</option>';
+            }
+
+            // 更新睡眠质量选项
+            const sleepSelect = document.getElementById('sleep');
+            if (sleepSelect) {
+                sleepSelect.innerHTML = isEnglish ?
+                    '<option value="">Select quality</option><option value="excellent">Excellent</option><option value="good">Good</option><option value="fair">Fair</option><option value="poor">Poor</option>' :
+                    '<option value="">请选择质量</option><option value="excellent">优秀</option><option value="good">良好</option><option value="fair">一般</option><option value="poor">较差</option>';
+            }
+
+            // 更新吸烟选项
+            const smokingSelect = document.getElementById('smoking');
+            if (smokingSelect) {
+                smokingSelect.innerHTML = isEnglish ?
+                    '<option value="">Select option</option><option value="yes">Yes</option><option value="no">No</option>' :
+                    '<option value="">请选择</option><option value="yes">是</option><option value="no">否</option>';
+            }
+
+            // 更新饮酒选项
+            const drinkingSelect = document.getElementById('drinking');
+            if (drinkingSelect) {
+                drinkingSelect.innerHTML = isEnglish ?
+                    '<option value="">Select frequency</option><option value="never">Never</option><option value="light">Light</option><option value="moderate">Moderate</option><option value="heavy">Heavy</option>' :
+                    '<option value="">请选择频率</option><option value="never">从不</option><option value="light">偶尔</option><option value="moderate">适量</option><option value="heavy">经常</option>';
+            }
+        }
+
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // 页面切换
+        function showHome() {
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('health-assessment').classList.remove('active');
+        }
+
+        function showHealthAssessment() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('health-assessment').classList.add('active');
+        }
+
+        // 平滑滚动
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 健康评估步骤控制
+        function nextStep() {
+            if (currentStep === 1) {
+                // 验证第一步数据
+                const age = document.getElementById('age').value;
+                const gender = document.getElementById('gender').value;
+                const height = document.getElementById('height').value;
+                const weight = document.getElementById('weight').value;
+
+                if (!age || !gender || !height || !weight) {
+                    alert(isEnglish ? 'Please fill in all fields' : '请填写所有字段');
+                    return;
+                }
+
+                healthData.age = age;
+                healthData.gender = gender;
+                healthData.height = height;
+                healthData.weight = weight;
+
+                currentStep = 2;
+                updateStepDisplay();
+            } else if (currentStep === 2) {
+                // 验证第二步数据并计算结果
+                const exercise = document.getElementById('exercise').value;
+                const sleep = document.getElementById('sleep').value;
+                const smoking = document.getElementById('smoking').value;
+                const drinking = document.getElementById('drinking').value;
+
+                if (!exercise || !sleep || !smoking || !drinking) {
+                    alert(isEnglish ? 'Please fill in all fields' : '请填写所有字段');
+                    return;
+                }
+
+                healthData.exercise = exercise;
+                healthData.sleep = sleep;
+                healthData.smoking = smoking;
+                healthData.drinking = drinking;
+
+                // 计算健康评分
+                calculateHealthScore();
+                currentStep = 3;
+                updateStepDisplay();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        }
+
+        function updateStepDisplay() {
+            // 隐藏所有步骤
+            document.querySelectorAll('.assessment-step').forEach(step => {
+                step.classList.add('hidden');
+            });
+
+            // 显示当前步骤
+            document.getElementById(`step${currentStep}`).classList.remove('hidden');
+
+            // 更新进度条
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = `${(currentStep / 3) * 100}%`;
+
+            // 更新步骤标签颜色
+            document.querySelectorAll('[id^="step"][id$="-label"]').forEach((label, index) => {
+                if (index + 1 <= currentStep) {
+                    label.classList.remove('text-gray-400');
+                    label.classList.add('text-blue-600');
+                } else {
+                    label.classList.remove('text-blue-600');
+                    label.classList.add('text-gray-400');
+                }
+            });
+
+            // 更新按钮显示
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const restartBtn = document.getElementById('restart-btn');
+
+            if (currentStep === 1) {
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.remove('hidden');
+                restartBtn.classList.add('hidden');
+                document.getElementById('next-text').textContent = isEnglish ? 'Next' : '下一步';
+            } else if (currentStep === 2) {
+                prevBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+                restartBtn.classList.add('hidden');
+                document.getElementById('next-text').textContent = isEnglish ? 'Get Results' : '获取结果';
+            } else if (currentStep === 3) {
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+                restartBtn.classList.remove('hidden');
+            }
+        }
+
+        function calculateHealthScore() {
+            let score = 70; // 基础分数
+
+            // 年龄因素
+            const age = parseInt(healthData.age);
+            if (age < 30) score += 10;
+            else if (age > 65) score -= 10;
+
+            // 运动习惯
+            if (healthData.exercise === 'daily') score += 15;
+            else if (healthData.exercise === 'weekly') score += 10;
+            else if (healthData.exercise === 'monthly') score += 5;
+            else score -= 5;
+
+            // 睡眠质量
+            if (healthData.sleep === 'excellent') score += 10;
+            else if (healthData.sleep === 'good') score += 5;
+            else if (healthData.sleep === 'poor') score -= 10;
+
+            // 吸烟
+            if (healthData.smoking === 'yes') score -= 15;
+
+            // 饮酒
+            if (healthData.drinking === 'heavy') score -= 10;
+            else if (healthData.drinking === 'moderate') score -= 5;
+
+            score = Math.max(0, Math.min(100, score));
+
+            // 更新显示
+            document.getElementById('health-score').textContent = score;
+            document.getElementById('score-bar').style.width = `${score}%`;
+
+            // 更新等级和颜色
+            let level, color, barColor;
+            if (score >= 80) {
+                level = isEnglish ? 'Excellent' : '优秀';
+                color = 'text-green-600';
+                barColor = 'bg-green-500';
+            } else if (score >= 60) {
+                level = isEnglish ? 'Good' : '良好';
+                color = 'text-blue-600';
+                barColor = 'bg-blue-500';
+            } else if (score >= 40) {
+                level = isEnglish ? 'Fair' : '一般';
+                color = 'text-yellow-600';
+                barColor = 'bg-yellow-500';
+            } else {
+                level = isEnglish ? 'Needs Improvement' : '需要改善';
+                color = 'text-red-600';
+                barColor = 'bg-red-500';
+            }
+
+            document.getElementById('score-level').textContent = level;
+            document.getElementById('score-level').className = `text-2xl font-semibold mb-4 ${color}`;
+            document.getElementById('health-score').className = color;
+            document.getElementById('score-bar').className = `score-bar h-4 rounded-full ${barColor}`;
+
+            // 生成建议
+            generateRecommendations(score);
+        }
+
+        function generateRecommendations(score) {
+            const recommendationsDiv = document.getElementById('recommendations');
+            let recommendations = [];
+
+            if (score < 60) {
+                recommendations.push({
+                    type: 'warning',
+                    text: isEnglish ? 'Consider increasing physical activity and improving sleep habits' : '建议增加体育活动并改善睡眠习惯'
+                });
+            }
+
+            if (healthData.smoking === 'yes') {
+                recommendations.push({
+                    type: 'danger',
+                    text: isEnglish ? 'Quitting smoking would significantly improve your health score' : '戒烟将显著提高您的健康评分'
+                });
+            }
+
+            if (healthData.exercise === 'never') {
+                recommendations.push({
+                    type: 'info',
+                    text: isEnglish ? 'Regular exercise can greatly improve your overall health' : '定期运动可以大大改善您的整体健康状况'
+                });
+            }
+
+            if (score >= 80) {
+                recommendations.push({
+                    type: 'success',
+                    text: isEnglish ? 'Great job! Keep maintaining your healthy lifestyle' : '做得很好！请继续保持健康的生活方式'
+                });
+            }
+
+            // 渲染建议
+            recommendationsDiv.innerHTML = recommendations.map(rec => {
+                const bgColor = rec.type === 'success' ? 'bg-green-50 border-green-400' :
+                               rec.type === 'danger' ? 'bg-red-50 border-red-400' :
+                               rec.type === 'warning' ? 'bg-yellow-50 border-yellow-400' :
+                               'bg-blue-50 border-blue-400';
+                
+                const textColor = rec.type === 'success' ? 'text-green-800' :
+                                 rec.type === 'danger' ? 'text-red-800' :
+                                 rec.type === 'warning' ? 'text-yellow-800' :
+                                 'text-blue-800';
+
+                return `<div class="${bgColor} border-l-4 p-4">
+                    <p class="${textColor}">• ${rec.text}</p>
+                </div>`;
+            }).join('');
+        }
+
+        function restartAssessment() {
+            currentStep = 1;
+            healthData = {};
+            
+            // 清空表单
+            document.getElementById('age').value = '';
+            document.getElementById('gender').value = '';
+            document.getElementById('height').value = '';
+            document.getElementById('weight').value = '';
+            document.getElementById('exercise').value = '';
+            document.getElementById('sleep').value = '';
+            document.getElementById('smoking').value = '';
+            document.getElementById('drinking').value = '';
+            
+            updateStepDisplay();
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStepDisplay();
+        });
+    </script>
+</body>
+</html>
+
