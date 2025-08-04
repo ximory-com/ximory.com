@@ -6,6 +6,15 @@
     <title>心沐智康 - AI赋能健康科技 | Ximory Technology</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 页面切换样式 */
+        #home, #health-assessment, #health-dashboard {
+            display: none;
+        }
+        #home.active, #health-assessment.active, #health-dashboard.active {
+            display: block;
+        }
+    </style>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta name="description" content="心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案">
     <meta name="keywords" content="AI健康评估,数字健康,健康管理,人工智能,心沐智康">
@@ -70,7 +79,8 @@
     </nav>
 
     <!-- 主内容 -->
-    <div id="main-content">
+    <div id="home" class="active">
+        <div id="main-content">
         <!-- Hero Section -->
         <section class="py-20 text-center">
             <div class="max-w-6xl mx-auto px-4">
@@ -291,6 +301,7 @@
                 </div>
             </div>
         </section>
+    </div>
     </div>
 
     <!-- 健康评估界面 -->
