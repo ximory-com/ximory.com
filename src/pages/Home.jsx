@@ -205,45 +205,45 @@ const Home = ({ showPage, isEnglish }) => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-900">
+      <section id="contact" className="py-20 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               {isEnglish ? 'Contact Us' : '联系我们'}
             </h2>
           </div>
           
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-gray-700">
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-6">
                     {isEnglish ? 'Contact Information' : '联系信息'}
                   </h3>
                   <div className="space-y-4">
-                    <div className="flex items-center text-gray-300">
-                      <div className="w-6 h-6 mr-3 text-blue-400">📧</div>
+                    <div className="flex items-center text-gray-700">
+                      <div className="w-6 h-6 mr-3 text-blue-600">📧</div>
                       <div>
                         <p className="font-medium">{isEnglish ? 'Email' : '邮箱'}</p>
                         <p>contact@ximory.com</p>
                       </div>
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <div className="w-6 h-6 mr-3 text-blue-400">🌐</div>
+                    <div className="flex items-center text-gray-700">
+                      <div className="w-6 h-6 mr-3 text-blue-600">🌐</div>
                       <div>
                         <p className="font-medium">{isEnglish ? 'Website' : '官网'}</p>
                         <p>www.ximory.com</p>
                       </div>
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <div className="w-6 h-6 mr-3 text-blue-400">📱</div>
+                    <div className="flex items-center text-gray-700">
+                      <div className="w-6 h-6 mr-3 text-blue-600">📱</div>
                       <div>
                         <p className="font-medium">{isEnglish ? 'Service Hotline' : '服务热线'}</p>
                         <p>400-888-0000</p>
                       </div>
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <div className="w-6 h-6 mr-3 text-blue-400">💬</div>
+                    <div className="flex items-center text-gray-700">
+                      <div className="w-6 h-6 mr-3 text-blue-600">💬</div>
                       <div>
                         <p className="font-medium">{isEnglish ? 'WeChat' : '微信客服'}</p>
                         <p>ximory-service</p>
@@ -253,10 +253,10 @@ const Home = ({ showPage, isEnglish }) => {
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-6">
                     {isEnglish ? 'Business Hours' : '服务时间'}
                   </h3>
-                  <div className="space-y-4 text-gray-300">
+                  <div className="space-y-4 text-gray-700">
                     <div>
                       <p className="font-medium">{isEnglish ? 'Online Service' : '在线服务'}</p>
                       <p>{isEnglish ? '24/7 Available' : '7×24小时全天候服务'}</p>
@@ -278,7 +278,7 @@ const Home = ({ showPage, isEnglish }) => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-950 py-12">
+      <footer className="bg-gray-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
@@ -287,7 +287,7 @@ const Home = ({ showPage, isEnglish }) => {
                 alt="心沐智康 Ximory" 
                 className="h-8 w-auto mb-4"
               />
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-600 text-sm">
                 {isEnglish 
                   ? 'Empowering health with intelligence, illuminating hearts with technology'
                   : '用智慧赋能健康，让心灵沐浴科技之光'
@@ -296,48 +296,48 @@ const Home = ({ showPage, isEnglish }) => {
             </div>
             
             <div>
-              <h4 className="text-white font-semibold mb-4">
+              <h4 className="text-gray-900 font-semibold mb-4">
                 {isEnglish ? 'Quick Links' : '快速链接'}
               </h4>
-              <div className="space-y-2 text-gray-400 text-sm">
-                <p className="hover:text-white cursor-pointer transition-colors">
+              <div className="space-y-2 text-gray-600 text-sm">
+                <p className="hover:text-gray-900 cursor-pointer transition-colors">
                   {isEnglish ? 'Health Assessment' : '健康评估'}
                 </p>
-                <p className="hover:text-white cursor-pointer transition-colors">
+                <p className="hover:text-gray-900 cursor-pointer transition-colors">
                   {isEnglish ? 'Data Dashboard' : '数据仪表板'}
                 </p>
-                <p className="hover:text-white cursor-pointer transition-colors">
+                <p className="hover:text-gray-900 cursor-pointer transition-colors">
                   {isEnglish ? 'Privacy Policy' : '隐私政策'}
                 </p>
-                <p className="hover:text-white cursor-pointer transition-colors">
+                <p className="hover:text-gray-900 cursor-pointer transition-colors">
                   {isEnglish ? 'Terms of Service' : '服务条款'}
                 </p>
               </div>
             </div>
             
             <div>
-              <h4 className="text-white font-semibold mb-4">
+              <h4 className="text-gray-900 font-semibold mb-4">
                 {isEnglish ? 'Follow Us' : '关注我们'}
               </h4>
               <div className="flex space-x-4">
                 <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-blue-700 transition-colors">
                   <span className="text-white text-sm">微</span>
                 </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-600 transition-colors">
+                <div className="w-8 h-8 bg-gray-500 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-600 transition-colors">
                   <span className="text-white text-sm">@</span>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="border-t border-gray-800 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+          <div className="border-t border-gray-300 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm">
               <p>
                 © 2024 {isEnglish ? 'Ximory Technology Co., Ltd. All rights reserved.' : '心沐智康科技有限公司 版权所有'}
               </p>
               <p className="mt-2 md:mt-0">
                 {isEnglish ? 'ICP License: ' : 'ICP备案号：'}
-                <span className="text-gray-300">京ICP备2024000000号</span>
+                <span className="text-gray-700">京ICP备2024000000号</span>
               </p>
             </div>
           </div>
