@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
 import { Heart, Brain, Shield, Users, Zap, Award } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const Home = ({ showPage, isEnglish }) => {
   const scrollToSection = (sectionId) => {
@@ -14,9 +14,11 @@ const Home = ({ showPage, isEnglish }) => {
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="hero-logo mx-auto mb-8 w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center">
-            <div className="text-4xl font-bold text-blue-600">心沐</div>
-          </div>
+          <img 
+            src="/logo_vertical.jpg" 
+            alt="心沐智康 Ximory" 
+            className="mx-auto mb-8 h-32 w-auto"
+          />
           
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             {isEnglish ? (

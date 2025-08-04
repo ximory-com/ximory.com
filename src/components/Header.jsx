@@ -40,9 +40,12 @@ const Header = ({ currentPage, showPage, isEnglish, toggleLanguage }) => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="hero-logo mx-auto mb-8 w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center">
-              <div className="text-4xl font-bold text-blue-600">心沐</div>
-            </div>
+            <img 
+              src="/logo_horizontal.png" 
+              alt="心沐智康 Ximory" 
+              className="h-10 w-auto cursor-pointer"
+              onClick={() => showPage('home')}
+            />
           </div>
 
           {/* Desktop Navigation */}
