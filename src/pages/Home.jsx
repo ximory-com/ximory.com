@@ -20,7 +20,7 @@ const Home = ({ showPage, isEnglish }) => {
             className="mx-auto mb-8 h-40 w-auto opacity-90 mix-blend-multiply"
           />
           
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-700 via-blue-600 to-emerald-500 bg-clip-text text-transparent mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-800 via-blue-700 to-emerald-500 bg-clip-text text-transparent mb-6 leading-tight">
             {isEnglish ? (
               <>
                 Empowering Health with Intelligence<br />
@@ -51,7 +51,7 @@ const Home = ({ showPage, isEnglish }) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button 
               onClick={() => showPage('health-assessment')}
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-700 to-emerald-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-800 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto bg-gradient-to-r from-blue-800 to-emerald-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-900 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl"
             >
               {isEnglish ? 'Free Health Assessment' : '免费健康评估'}
             </Button>
@@ -208,7 +208,7 @@ const Home = ({ showPage, isEnglish }) => {
       <section id="contact" className="py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-700 to-emerald-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-800 to-emerald-600 bg-clip-text text-transparent mb-4">
               {isEnglish ? 'Contact Us' : '联系我们'}
             </h2>
           </div>
@@ -320,7 +320,7 @@ const Home = ({ showPage, isEnglish }) => {
                 {isEnglish ? 'Follow Us' : '关注我们'}
               </h4>
               <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-700 to-emerald-600 rounded-full flex items-center justify-center cursor-pointer hover:from-blue-800 hover:to-emerald-700 transition-all">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-800 to-emerald-600 rounded-full flex items-center justify-center cursor-pointer hover:from-blue-900 hover:to-emerald-700 transition-all">
                   <span className="text-white text-sm">微</span>
                 </div>
                 <div className="w-8 h-8 bg-slate-500 rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-600 transition-colors">
