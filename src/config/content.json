@@ -1,0 +1,234 @@
+{
+  "brand": {
+    "name": {
+      "zh": "心沐智康",
+      "en": "Ximory"
+    },
+    "fullName": {
+      "zh": "心沐智康科技有限公司",
+      "en": "Ximory Technology Co., Ltd."
+    },
+    "tagline": {
+      "zh": {
+        "line1": "用智慧赋能健康",
+        "line2": "让心灵沐浴科技之光"
+      },
+      "en": {
+        "line1": "Empowering Health with Intelligence",
+        "line2": "Illuminating Hearts with Technology"
+      }
+    },
+    "subtitle": {
+      "zh": "AI 赋能 · 数字健康 · 人本关怀",
+      "en": "AI Empowerment · Digital Health · Human Care"
+    },
+    "description": {
+      "zh": "心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案",
+      "en": "Ximory is committed to empowering individuals and organizations with AI, creating user-centered digital health solutions"
+    }
+  },
+  "about": {
+    "title": {
+      "zh": "关于我们",
+      "en": "About Us"
+    },
+    "vision": {
+      "title": {
+        "zh": "我们的愿景",
+        "en": "Our Vision"
+      },
+      "content": {
+        "zh": "成为全球领先的AI健康管理平台，让每个人都能享受到智能化、个性化的健康服务，实现健康生活的美好愿景。",
+        "en": "To become the world's leading AI health management platform, enabling everyone to enjoy intelligent and personalized health services, realizing the beautiful vision of healthy living."
+      }
+    },
+    "mission": {
+      "title": {
+        "zh": "我们的使命",
+        "en": "Our Mission"
+      },
+      "content": {
+        "zh": "通过先进的人工智能技术，为用户提供精准的健康评估、个性化的健康建议和全方位的健康管理服务，让科技真正服务于人类健康事业。",
+        "en": "Through advanced artificial intelligence technology, we provide users with accurate health assessments, personalized health recommendations, and comprehensive health management services, making technology truly serve human health."
+      }
+    },
+    "story": {
+      "title": {
+        "zh": "品牌故事",
+        "en": "Brand Story"
+      },
+      "content": {
+        "zh": "心沐智康诞生于对健康管理现状的深度思考。我们发现，传统的健康管理方式往往缺乏个性化和智能化，无法满足现代人多样化的健康需求。因此，我们汇聚了一群热爱健康事业的技术专家和医疗专业人士，致力于用AI技术重新定义健康管理。\n\n'心沐'寓意着用心呵护，如沐春风；'智康'代表着智慧健康，科技赋能。我们相信，通过技术的力量，可以让每个人都拥有专属的健康管家，享受更加便捷、精准、温暖的健康服务。",
+        "en": "Ximory was born from deep reflection on the current state of health management. We found that traditional health management methods often lack personalization and intelligence, unable to meet the diverse health needs of modern people. Therefore, we brought together a group of technology experts and medical professionals who are passionate about health, committed to redefining health management with AI technology.\n\n'Xi' means caring with heart, like a spring breeze; 'mory' represents intelligent health, technology empowerment. We believe that through the power of technology, everyone can have their own dedicated health butler, enjoying more convenient, accurate, and warm health services."
+      }
+    },
+    "values": {
+      "title": {
+        "zh": "核心价值观",
+        "en": "Core Values"
+      },
+      "items": [
+        {
+          "title": {
+            "zh": "用户至上",
+            "en": "User First"
+          },
+          "description": {
+            "zh": "始终以用户需求为中心，提供最优质的健康服务体验",
+            "en": "Always center on user needs, providing the highest quality health service experience"
+          }
+        },
+        {
+          "title": {
+            "zh": "科技创新",
+            "en": "Technology Innovation"
+          },
+          "description": {
+            "zh": "持续探索前沿AI技术，推动健康管理领域的创新发展",
+            "en": "Continuously explore cutting-edge AI technology, driving innovative development in health management"
+          }
+        },
+        {
+          "title": {
+            "zh": "专业可靠",
+            "en": "Professional & Reliable"
+          },
+          "description": {
+            "zh": "基于科学的医学理论和严谨的数据分析，确保服务的专业性和可靠性",
+            "en": "Based on scientific medical theory and rigorous data analysis, ensuring professional and reliable services"
+          }
+        },
+        {
+          "title": {
+            "zh": "温暖关怀",
+            "en": "Warm Care"
+          },
+          "description": {
+            "zh": "用温暖的科技传递人文关怀，让健康管理充满温度",
+            "en": "Conveying humanistic care through warm technology, making health management full of warmth"
+          }
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": {
+      "zh": "联系我们",
+      "en": "Contact Us"
+    },
+    "info": {
+      "title": {
+        "zh": "联系信息",
+        "en": "Contact Information"
+      },
+      "email": "contact@ximory.com",
+      "website": "www.ximory.com",
+      "hotline": "400-888-0000",
+      "wechat": "ximory-service"
+    },
+    "hours": {
+      "title": {
+        "zh": "服务时间",
+        "en": "Business Hours"
+      },
+      "online": {
+        "title": {
+          "zh": "在线服务",
+          "en": "Online Service"
+        },
+        "time": {
+          "zh": "7×24小时全天候服务",
+          "en": "24/7 Available"
+        }
+      },
+      "phone": {
+        "title": {
+          "zh": "电话支持",
+          "en": "Phone Support"
+        },
+        "time": {
+          "zh": "周一至周五 9:00-18:00",
+          "en": "Mon-Fri 9:00-18:00"
+        }
+      },
+      "emergency": {
+        "title": {
+          "zh": "紧急支持",
+          "en": "Emergency Support"
+        },
+        "time": {
+          "zh": "周末提供紧急技术支持",
+          "en": "Available on weekends"
+        }
+      }
+    }
+  },
+  "footer": {
+    "description": {
+      "zh": "用智慧赋能健康，让心灵沐浴科技之光",
+      "en": "Empowering health with intelligence, illuminating hearts with technology"
+    },
+    "quickLinks": {
+      "title": {
+        "zh": "快速链接",
+        "en": "Quick Links"
+      },
+      "items": [
+        {
+          "zh": "健康评估",
+          "en": "Health Assessment"
+        },
+        {
+          "zh": "数据仪表板",
+          "en": "Data Dashboard"
+        },
+        {
+          "zh": "隐私政策",
+          "en": "Privacy Policy"
+        },
+        {
+          "zh": "服务条款",
+          "en": "Terms of Service"
+        }
+      ]
+    },
+    "social": {
+      "title": {
+        "zh": "关注我们",
+        "en": "Follow Us"
+      }
+    },
+    "copyright": {
+      "company": {
+        "zh": "心沐智康科技有限公司 版权所有",
+        "en": "Ximory Technology Co., Ltd. All rights reserved."
+      },
+      "icp": {
+        "label": {
+          "zh": "ICP备案号：",
+          "en": "ICP License: "
+        },
+        "number": "京ICP备2024000000号"
+      }
+    }
+  },
+  "buttons": {
+    "healthAssessment": {
+      "zh": "免费健康评估",
+      "en": "Free Health Assessment"
+    },
+    "learnMore": {
+      "zh": "了解更多",
+      "en": "Learn More"
+    },
+    "refreshData": {
+      "zh": "刷新数据",
+      "en": "Refresh Data"
+    },
+    "refreshing": {
+      "zh": "刷新中...",
+      "en": "Refreshing..."
+    }
+  }
+}
+

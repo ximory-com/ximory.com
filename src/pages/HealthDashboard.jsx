@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { RefreshCw, TrendingUp, Users, Calendar, Award } from 'lucide-react'
+import content from '../config/content.json'
 
 const HealthDashboard = ({ healthDataManager, showPage, isEnglish }) => {
   const [statistics, setStatistics] = useState({})
@@ -125,8 +126,8 @@ const HealthDashboard = ({ healthDataManager, showPage, isEnglish }) => {
             >
               <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
               {isRefreshing 
-                ? (isEnglish ? 'Refreshing...' : '刷新中...') 
-                : (isEnglish ? 'Refresh Data' : '刷新数据')
+                ? (isEnglish ? content.buttons.refreshing.en : content.buttons.refreshing.zh) 
+                : (isEnglish ? content.buttons.refreshData.en : content.buttons.refreshData.zh)
               }
             </Button>
           </div>

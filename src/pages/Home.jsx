@@ -1,5 +1,6 @@
 import { Heart, Brain, Shield, Users, Zap, Award } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import content from '../config/content.json'
 
 const Home = ({ showPage, isEnglish }) => {
   const scrollToSection = (sectionId) => {
@@ -15,37 +16,31 @@ const Home = ({ showPage, isEnglish }) => {
       <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <img 
-            src="/logo_vertical.jpg" 
-            alt="心沐智康 Ximory" 
-            className="mx-auto mb-8 h-40 w-auto opacity-90 mix-blend-multiply"
+            src="/logo_vertical.png" 
+            alt={`${content.brand.name.zh} ${content.brand.name.en}`} 
+            className="mx-auto mb-8 h-40 w-auto"
           />
           
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-800 via-blue-700 to-emerald-500 bg-clip-text text-transparent mb-6 leading-tight">
             {isEnglish ? (
               <>
-                Empowering Health with Intelligence<br />
-                Illuminating Hearts with Technology
+                {content.brand.tagline.en.line1}<br />
+                {content.brand.tagline.en.line2}
               </>
             ) : (
               <>
-                用智慧赋能健康<br />
-                让心灵沐浴科技之光
+                {content.brand.tagline.zh.line1}<br />
+                {content.brand.tagline.zh.line2}
               </>
             )}
           </h1>
           
           <p className="text-xl text-slate-600 mb-12 max-w-3xl mx-auto">
-            {isEnglish 
-              ? 'AI Empowerment · Digital Health · Human Care'
-              : 'AI 赋能 · 数字健康 · 人本关怀'
-            }
+            {isEnglish ? content.brand.subtitle.en : content.brand.subtitle.zh}
           </p>
           
           <p className="text-lg text-slate-500 mb-12 max-w-3xl mx-auto">
-            {isEnglish
-              ? 'Ximory is committed to empowering individuals and organizations with AI, creating user-centered digital health solutions'
-              : '心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案'
-            }
+            {isEnglish ? content.brand.description.en : content.brand.description.zh}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -53,14 +48,14 @@ const Home = ({ showPage, isEnglish }) => {
               onClick={() => showPage('health-assessment')}
               className="w-full sm:w-auto bg-gradient-to-r from-blue-800 to-emerald-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-900 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl"
             >
-              {isEnglish ? 'Free Health Assessment' : '免费健康评估'}
+              {isEnglish ? content.buttons.healthAssessment.en : content.buttons.healthAssessment.zh}
             </Button>
             <Button 
               onClick={() => scrollToSection('about')}
               variant="outline"
               className="w-full sm:w-auto border-2 border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:bg-slate-50 transition-all"
             >
-              {isEnglish ? 'Learn More' : '了解更多'}
+              {isEnglish ? content.buttons.learnMore.en : content.buttons.learnMore.zh}
             </Button>
           </div>
         </div>
