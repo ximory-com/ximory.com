@@ -26,14 +26,6 @@ const Header = ({ currentPage, showPage, isEnglish, toggleLanguage }) => {
     }
   }
 
-  const translations = {
-    'hero-title': isEnglish ? 'Empowering Health with Intelligence<br>Illuminating Hearts with Technology' : '用智慧赋能健康，让心灵沐浴科技之光',
-    'hero-subtitle': isEnglish ? 'AI Empowerment · Digital Health · Human Care' : 'AI 赋能 · 数字健康 · 人本关怀',
-    'hero-description': isEnglish ? 'Ximory is committed to empowering individuals and organizations with AI, creating user-centered digital health solutions' : '心沐智康致力于以AI赋能个体健康管理，打造以用户为中心的数字健康解决方案',
-    'assessment-btn': isEnglish ? 'Free Health Assessment' : '免费健康评估',
-    'learn-more-btn': isEnglish ? 'Learn More' : '了解更多'
-  }
-
   return (
     <nav className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
