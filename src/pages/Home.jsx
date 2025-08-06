@@ -333,7 +333,7 @@ const Home = ({ showPage, isEnglish }) => {
           <div className="border-t border-slate-300 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center text-slate-600 text-sm">
               <p>
-                © 2024 {isEnglish ? 'Ximory Technology Co., Ltd. All rights reserved.' : '心沐智康科技有限公司 版权所有'}
+                © 2025 {isEnglish ? 'Ximory Technology Co., Ltd. All rights reserved.' : '心沐智康（杭州）科技有限公司 版权所有'}
               </p>
               <p className="mt-2 md:mt-0">
                 {isEnglish ? 'ICP License: ' : 'ICP备案号：'}
