@@ -5,8 +5,8 @@
       "en": "Ximory"
     },
     "fullName": {
-      "zh": "心沐智康科技有限公司",
-      "en": "Ximory Technology Co., Ltd."
+      "zh": "心沐智康（杭州）科技有限公司",
+      "en": "Ximory (Hangzhou) Technology Co., Ltd."
     },
     "tagline": {
       "zh": {
@@ -32,15 +32,29 @@
       "zh": "关于我们",
       "en": "About Us"
     },
+    "introduction": {
+      "zh": "心沐智康（杭州）科技有限公司，简称"心沐智康"，成立于2025年，坐落于中国杭州西湖区，是一家专注于人工智能与健康科技融合应用的创新型科技企业。",
+      "en": "Ximory (Hangzhou) Technology Co., Ltd., referred to as \"Ximory\", was established in 2025 and is located in Hangzhou West District. It is an innovative technology enterprise specializing in artificial intelligence and health technology integration applications."
+    },
     "vision": {
       "title": {
-        "zh": "我们的愿景",
-        "en": "Our Vision"
+        "zh": "品牌愿景",
+        "en": "Brand Vision"
       },
       "content": {
-        "zh": "成为全球领先的AI健康管理平台，让每个人都能享受到智能化、个性化的健康服务，实现健康生活的美好愿景。",
-        "en": "To become the world's leading AI health management platform, enabling everyone to enjoy intelligent and personalized health services, realizing the beautiful vision of healthy living."
-      }
+        "zh": "让智慧与心灵共生，赋能每一个生命真实成长。我们相信健康不仅是身体无恙，更是身心灵的和谐共鸣。",
+        "en": "Let wisdom and heart coexist, enabling everyone to live a true growth. We believe that health is not just physical wellness, but also spiritual peace and the joy of shared growth."
+      },
+      "points": [
+        {
+          "zh": "科技的终极使命，是让人类更好地自由",
+          "en": "Technology empowers life, making health management more intelligent and convenient"
+        },
+        {
+          "zh": "我们的使命不仅是身体无恙，更是身心灵的和谐共鸣",
+          "en": "Wisdom guides the future, creating a healthier and better life"
+        }
+      ]
     },
     "mission": {
       "title": {
@@ -61,55 +75,59 @@
         "zh": "心沐智康诞生于对健康管理现状的深度思考。我们发现，传统的健康管理方式往往缺乏个性化和智能化，无法满足现代人多样化的健康需求。因此，我们汇聚了一群热爱健康事业的技术专家和医疗专业人士，致力于用AI技术重新定义健康管理。\n\n'心沐'寓意着用心呵护，如沐春风；'智康'代表着智慧健康，科技赋能。我们相信，通过技术的力量，可以让每个人都拥有专属的健康管家，享受更加便捷、精准、温暖的健康服务。",
         "en": "Ximory was born from deep reflection on the current state of health management. We found that traditional health management methods often lack personalization and intelligence, unable to meet the diverse health needs of modern people. Therefore, we brought together a group of technology experts and medical professionals who are passionate about health, committed to redefining health management with AI technology.\n\n'Xi' means caring with heart, like a spring breeze; 'mory' represents intelligent health, technology empowerment. We believe that through the power of technology, everyone can have their own dedicated health butler, enjoying more convenient, accurate, and warm health services."
       }
-    },
-    "values": {
-      "title": {
-        "zh": "核心价值观",
-        "en": "Core Values"
-      },
-      "items": [
-        {
-          "title": {
-            "zh": "用户至上",
-            "en": "User First"
-          },
-          "description": {
-            "zh": "始终以用户需求为中心，提供最优质的健康服务体验",
-            "en": "Always center on user needs, providing the highest quality health service experience"
-          }
-        },
-        {
-          "title": {
-            "zh": "科技创新",
-            "en": "Technology Innovation"
-          },
-          "description": {
-            "zh": "持续探索前沿AI技术，推动健康管理领域的创新发展",
-            "en": "Continuously explore cutting-edge AI technology, driving innovative development in health management"
-          }
-        },
-        {
-          "title": {
-            "zh": "专业可靠",
-            "en": "Professional & Reliable"
-          },
-          "description": {
-            "zh": "基于科学的医学理论和严谨的数据分析，确保服务的专业性和可靠性",
-            "en": "Based on scientific medical theory and rigorous data analysis, ensuring professional and reliable services"
-          }
-        },
-        {
-          "title": {
-            "zh": "温暖关怀",
-            "en": "Warm Care"
-          },
-          "description": {
-            "zh": "用温暖的科技传递人文关怀，让健康管理充满温度",
-            "en": "Conveying humanistic care through warm technology, making health management full of warmth"
-          }
-        }
-      ]
     }
+  },
+  "coreValues": {
+    "title": {
+      "zh": "核心价值",
+      "en": "Core Values"
+    },
+    "items": [
+      {
+        "icon": "Heart",
+        "title": {
+          "zh": "人本关怀",
+          "en": "Human Care"
+        },
+        "description": {
+          "zh": "以人为本，关注每个个体的真实需求",
+          "en": "Focus on individual needs and care for every individual's true needs"
+        }
+      },
+      {
+        "icon": "Brain",
+        "title": {
+          "zh": "AI 赋能",
+          "en": "AI Empowerment"
+        },
+        "description": {
+          "zh": "用人工智能技术提升健康管理理念",
+          "en": "Use artificial intelligence technology to enhance health management capabilities"
+        }
+      },
+      {
+        "icon": "Shield",
+        "title": {
+          "zh": "专业可靠",
+          "en": "Professional & Reliable"
+        },
+        "description": {
+          "zh": "基于科学的医学理论和严谨的数据分析，确保服务的专业性和可靠性",
+          "en": "Based on scientific medical theory and rigorous data analysis, ensuring professional and reliable services"
+        }
+      },
+      {
+        "icon": "Users",
+        "title": {
+          "zh": "温暖关怀",
+          "en": "Warm Care"
+        },
+        "description": {
+          "zh": "用温暖的科技传递人文关怀，让健康管理充满温度",
+          "en": "Conveying humanistic care through warm technology, making health management full of warmth"
+        }
+      }
+    ]
   },
   "contact": {
     "title": {
@@ -121,46 +139,78 @@
         "zh": "联系信息",
         "en": "Contact Information"
       },
-      "email": "contact@ximory.com",
-      "website": "www.ximory.com",
-      "hotline": "400-888-0000",
-      "wechat": "ximory-service"
+      "items": [
+        {
+          "icon": "📧",
+          "label": {
+            "zh": "邮箱",
+            "en": "Email"
+          },
+          "value": "contact@ximory.com"
+        },
+        {
+          "icon": "🌐",
+          "label": {
+            "zh": "官网",
+            "en": "Website"
+          },
+          "value": "www.ximory.com"
+        },
+        {
+          "icon": "📱",
+          "label": {
+            "zh": "服务热线",
+            "en": "Service Hotline"
+          },
+          "value": "400-888-0000"
+        },
+        {
+          "icon": "💬",
+          "label": {
+            "zh": "微信客服",
+            "en": "WeChat"
+          },
+          "value": "ximory-service"
+        }
+      ]
     },
     "hours": {
       "title": {
         "zh": "服务时间",
         "en": "Business Hours"
       },
-      "online": {
-        "title": {
-          "zh": "在线服务",
-          "en": "Online Service"
+      "items": [
+        {
+          "label": {
+            "zh": "在线服务",
+            "en": "Online Service"
+          },
+          "time": {
+            "zh": "7×24小时全天候服务",
+            "en": "24/7 Available"
+          }
         },
-        "time": {
-          "zh": "7×24小时全天候服务",
-          "en": "24/7 Available"
-        }
-      },
-      "phone": {
-        "title": {
-          "zh": "电话支持",
-          "en": "Phone Support"
+        {
+          "label": {
+            "zh": "电话支持",
+            "en": "Phone Support"
+          },
+          "time": {
+            "zh": "周一至周五 9:00-18:00",
+            "en": "Mon-Fri 9:00-18:00"
+          }
         },
-        "time": {
-          "zh": "周一至周五 9:00-18:00",
-          "en": "Mon-Fri 9:00-18:00"
+        {
+          "label": {
+            "zh": "紧急支持",
+            "en": "Emergency Support"
+          },
+          "time": {
+            "zh": "周末提供紧急技术支持",
+            "en": "Available on weekends"
+          }
         }
-      },
-      "emergency": {
-        "title": {
-          "zh": "紧急支持",
-          "en": "Emergency Support"
-        },
-        "time": {
-          "zh": "周末提供紧急技术支持",
-          "en": "Available on weekends"
-        }
-      }
+      ]
     }
   },
   "footer": {
@@ -196,11 +246,23 @@
       "title": {
         "zh": "关注我们",
         "en": "Follow Us"
-      }
+      },
+      "items": [
+        {
+          "name": "wechat",
+          "label": "微",
+          "color": "from-blue-800 to-emerald-600"
+        },
+        {
+          "name": "email",
+          "label": "@",
+          "color": "bg-slate-500"
+        }
+      ]
     },
     "copyright": {
       "company": {
-        "zh": "心沐智康科技有限公司 版权所有",
+        "zh": "心沐智康（杭州）科技有限公司 版权所有",
         "en": "Ximory Technology Co., Ltd. All rights reserved."
       },
       "icp": {
@@ -214,7 +276,7 @@
   },
   "buttons": {
     "healthAssessment": {
-      "zh": "健康评估",
+      "zh": "免费健康评估",
       "en": "Free Health Assessment"
     },
     "learnMore": {

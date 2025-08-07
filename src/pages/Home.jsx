@@ -1,4 +1,4 @@
-import { Heart, Brain, Shield, Users, Zap, Award } from 'lucide-react'
+import { Heart, Brain, Shield, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import content from '../config/content.json'
 
@@ -66,87 +66,52 @@ const Home = ({ showPage, isEnglish }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {isEnglish ? 'About Us' : '关于我们'}
+              {isEnglish ? content.about.title.en : content.about.title.zh}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {isEnglish
-                ? 'Ximory (Hangzhou) Technology Co., Ltd., referred to as "Ximory", was established in 2025 and is located in Hangzhou West District. It is an innovative technology enterprise specializing in artificial intelligence and health technology integration applications.'
-                : '心沐智康（杭州）科技有限公司，简称"心沐智康"，成立于2025年，坐落于中国杭州西湖区，是一家专注于人工智能与健康科技融合应用的创新型科技企业。'
-              }
+              {isEnglish ? content.about.introduction.en : content.about.introduction.zh}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                {isEnglish ? 'Brand Vision' : '品牌愿景'}
+                {isEnglish ? content.about.vision.title.en : content.about.vision.title.zh}
               </h3>
               <p className="text-gray-600 mb-6">
-                {isEnglish
-                  ? 'Let wisdom and heart coexist, enabling everyone to live a true growth. We believe that health is not just physical wellness, but also spiritual peace and the joy of shared growth.'
-                  : '让智慧与心灵共生，赋能每一个生命真实成长。我们相信健康不仅是身体无恙，更是身心灵的和谐共鸣。'
-                }
+                {isEnglish ? content.about.vision.content.en : content.about.vision.content.zh}
               </p>
               <ul className="space-y-4">
-                <li className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  </div>
-                  <span className="text-gray-600">
-                    {isEnglish
-                      ? 'Technology empowers life, making health management more intelligent and convenient'
-                      : '科技的终极使命，是让人类更好地自由'
-                    }
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
-                    <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                  </div>
-                  <span className="text-gray-600">
-                    {isEnglish
-                      ? 'Wisdom guides the future, creating a healthier and better life'
-                      : '我们的使命不仅是身体无恙，更是身心灵的和谐共鸣'
-                    }
-                  </span>
-                </li>
+                {content.about.vision.points.map((point, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className={`w-6 h-6 ${index === 0 ? 'bg-blue-100' : 'bg-green-100'} rounded-full flex items-center justify-center mr-4 mt-1`}>
+                      <div className={`w-2 h-2 ${index === 0 ? 'bg-blue-600' : 'bg-green-600'} rounded-full`}></div>
+                    </div>
+                    <span className="text-gray-600">
+                      {isEnglish ? point.en : point.zh}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
             
             <div className="space-y-4">
-              <div className="flex items-start">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <Heart className="w-4 h-4 text-blue-600" />
+              {content.coreValues.items.slice(0, 2).map((value, index) => (
+                <div key={index} className="flex items-start">
+                  <div className={`w-6 h-6 ${index === 0 ? 'bg-blue-100' : 'bg-green-100'} rounded-full flex items-center justify-center mr-4 mt-1`}>
+                    {value.icon === 'Heart' && <Heart className={`w-4 h-4 ${index === 0 ? 'text-blue-600' : 'text-green-600'}`} />}
+                    {value.icon === 'Brain' && <Brain className={`w-4 h-4 ${index === 0 ? 'text-blue-600' : 'text-green-600'}`} />}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      {isEnglish ? value.title.en : value.title.zh}
+                    </h4>
+                    <p className="text-gray-600">
+                      {isEnglish ? value.description.en : value.description.zh}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    {isEnglish ? 'Human Care' : '人本关怀'}
-                  </h4>
-                  <p className="text-gray-600">
-                    {isEnglish
-                      ? 'Focus on individual needs and care for every individual\'s true needs'
-                      : '以人为本，关注每个个体的真实需求'
-                    }
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <Brain className="w-4 h-4 text-green-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    {isEnglish ? 'AI Empowerment' : 'AI 赋能'}
-                  </h4>
-                  <p className="text-gray-600">
-                    {isEnglish
-                      ? 'Use artificial intelligence technology to enhance health management capabilities'
-                      : '用人工智能技术提升健康管理理念'
-                    }
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -157,44 +122,29 @@ const Home = ({ showPage, isEnglish }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {isEnglish ? 'Core Values' : '核心价值'}
+              {isEnglish ? content.coreValues.title.en : content.coreValues.title.zh}
             </h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-6">
-                <Heart className="w-6 h-6 text-blue-600" />
+            {content.coreValues.items.map((value, index) => (
+              <div key={index} className="flex items-start">
+                <div className={`w-12 h-12 ${index % 2 === 0 ? 'bg-blue-100' : 'bg-green-100'} rounded-full flex items-center justify-center mr-6`}>
+                  {value.icon === 'Heart' && <Heart className={`w-6 h-6 ${index % 2 === 0 ? 'text-blue-600' : 'text-green-600'}`} />}
+                  {value.icon === 'Brain' && <Brain className={`w-6 h-6 ${index % 2 === 0 ? 'text-blue-600' : 'text-green-600'}`} />}
+                  {value.icon === 'Shield' && <Shield className={`w-6 h-6 ${index % 2 === 0 ? 'text-blue-600' : 'text-green-600'}`} />}
+                  {value.icon === 'Users' && <Users className={`w-6 h-6 ${index % 2 === 0 ? 'text-blue-600' : 'text-green-600'}`} />}
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    {isEnglish ? value.title.en : value.title.zh}
+                  </h3>
+                  <p className="text-gray-600">
+                    {isEnglish ? value.description.en : value.description.zh}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  {isEnglish ? 'Human Care' : '人本关怀'}
-                </h3>
-                <p className="text-gray-600">
-                  {isEnglish
-                    ? 'Focus on individual needs and care for every individual\'s true needs'
-                    : '以人为本，关注每个个体的真实需求'
-                  }
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-6">
-                <Brain className="w-6 h-6 text-green-600" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  {isEnglish ? 'AI Empowerment' : 'AI 赋能'}
-                </h3>
-                <p className="text-gray-600">
-                  {isEnglish
-                    ? 'Use artificial intelligence technology to enhance health management capabilities'
-                    : '用人工智能技术提升健康管理理念'
-                  }
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -204,7 +154,7 @@ const Home = ({ showPage, isEnglish }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-800 to-emerald-600 bg-clip-text text-transparent mb-4">
-              {isEnglish ? 'Contact Us' : '联系我们'}
+              {isEnglish ? content.contact.title.en : content.contact.title.zh}
             </h2>
           </div>
           
@@ -213,57 +163,34 @@ const Home = ({ showPage, isEnglish }) => {
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-xl font-semibold text-slate-900 mb-6">
-                    {isEnglish ? 'Contact Information' : '联系信息'}
+                    {isEnglish ? content.contact.info.title.en : content.contact.info.title.zh}
                   </h3>
                   <div className="space-y-4">
-                    <div className="flex items-center text-slate-700">
-                      <div className="w-6 h-6 mr-3 text-blue-600">📧</div>
-                      <div>
-                        <p className="font-medium">{isEnglish ? 'Email' : '邮箱'}</p>
-                        <p>contact@ximory.com</p>
+                    {content.contact.info.items.map((item, index) => (
+                      <div key={index} className="flex items-center text-slate-700">
+                        <div className={`w-6 h-6 mr-3 ${index % 2 === 0 ? 'text-blue-600' : 'text-emerald-600'}`}>
+                          {item.icon}
+                        </div>
+                        <div>
+                          <p className="font-medium">{isEnglish ? item.label.en : item.label.zh}</p>
+                          <p>{item.value}</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center text-slate-700">
-                      <div className="w-6 h-6 mr-3 text-emerald-600">🌐</div>
-                      <div>
-                        <p className="font-medium">{isEnglish ? 'Website' : '官网'}</p>
-                        <p>www.ximory.com</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center text-slate-700">
-                      <div className="w-6 h-6 mr-3 text-blue-600">📱</div>
-                      <div>
-                        <p className="font-medium">{isEnglish ? 'Service Hotline' : '服务热线'}</p>
-                        <p>400-888-0000</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center text-slate-700">
-                      <div className="w-6 h-6 mr-3 text-emerald-600">💬</div>
-                      <div>
-                        <p className="font-medium">{isEnglish ? 'WeChat' : '微信客服'}</p>
-                        <p>ximory-service</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
                 
                 <div>
                   <h3 className="text-xl font-semibold text-slate-900 mb-6">
-                    {isEnglish ? 'Business Hours' : '服务时间'}
+                    {isEnglish ? content.contact.hours.title.en : content.contact.hours.title.zh}
                   </h3>
                   <div className="space-y-4 text-slate-700">
-                    <div>
-                      <p className="font-medium">{isEnglish ? 'Online Service' : '在线服务'}</p>
-                      <p>{isEnglish ? '24/7 Available' : '7×24小时全天候服务'}</p>
-                    </div>
-                    <div>
-                      <p className="font-medium">{isEnglish ? 'Phone Support' : '电话支持'}</p>
-                      <p>{isEnglish ? 'Mon-Fri 9:00-18:00' : '周一至周五 9:00-18:00'}</p>
-                    </div>
-                    <div>
-                      <p className="font-medium">{isEnglish ? 'Emergency Support' : '紧急支持'}</p>
-                      <p>{isEnglish ? 'Available on weekends' : '周末提供紧急技术支持'}</p>
-                    </div>
+                    {content.contact.hours.items.map((item, index) => (
+                      <div key={index}>
+                        <p className="font-medium">{isEnglish ? item.label.en : item.label.zh}</p>
+                        <p>{isEnglish ? item.time.en : item.time.zh}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -279,48 +206,40 @@ const Home = ({ showPage, isEnglish }) => {
             <div>
               <img 
                 src="/logo_horizontal.png" 
-                alt="心沐智康 Ximory" 
+                alt={`${isEnglish ? content.brand.name.en : content.brand.name.zh} Logo`}
                 className="h-8 w-auto mb-4"
               />
               <p className="text-slate-600 text-sm">
-                {isEnglish 
-                  ? 'Empowering health with intelligence, illuminating hearts with technology'
-                  : '用智慧赋能健康，让心灵沐浴科技之光'
-                }
+                {isEnglish ? content.footer.description.en : content.footer.description.zh}
               </p>
             </div>
             
             <div>
               <h4 className="text-slate-900 font-semibold mb-4">
-                {isEnglish ? 'Quick Links' : '快速链接'}
+                {isEnglish ? content.footer.quickLinks.title.en : content.footer.quickLinks.title.zh}
               </h4>
               <div className="space-y-2 text-slate-600 text-sm">
-                <p className="hover:text-slate-900 cursor-pointer transition-colors">
-                  {isEnglish ? 'Health Assessment' : '健康评估'}
-                </p>
-                <p className="hover:text-slate-900 cursor-pointer transition-colors">
-                  {isEnglish ? 'Data Dashboard' : '数据仪表板'}
-                </p>
-                <p className="hover:text-slate-900 cursor-pointer transition-colors">
-                  {isEnglish ? 'Privacy Policy' : '隐私政策'}
-                </p>
-                <p className="hover:text-slate-900 cursor-pointer transition-colors">
-                  {isEnglish ? 'Terms of Service' : '服务条款'}
-                </p>
+                {content.footer.quickLinks.items.map((link, index) => (
+                  <p key={index} className="hover:text-slate-900 cursor-pointer transition-colors">
+                    {isEnglish ? link.en : link.zh}
+                  </p>
+                ))}
               </div>
             </div>
             
             <div>
               <h4 className="text-slate-900 font-semibold mb-4">
-                {isEnglish ? 'Follow Us' : '关注我们'}
+                {isEnglish ? content.footer.social.title.en : content.footer.social.title.zh}
               </h4>
               <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-800 to-emerald-600 rounded-full flex items-center justify-center cursor-pointer hover:from-blue-900 hover:to-emerald-700 transition-all">
-                  <span className="text-white text-sm">微</span>
-                </div>
-                <div className="w-8 h-8 bg-slate-500 rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-600 transition-colors">
-                  <span className="text-white text-sm">@</span>
-                </div>
+                {content.footer.social.items.map((social, index) => (
+                  <div 
+                    key={index}
+                    className={`w-8 h-8 ${social.color.startsWith('from-') ? `bg-gradient-to-r ${social.color}` : social.color} rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition-all`}
+                  >
+                    <span className="text-white text-sm">{social.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -328,11 +247,11 @@ const Home = ({ showPage, isEnglish }) => {
           <div className="border-t border-slate-300 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center text-slate-600 text-sm">
               <p>
-                © 2025 {isEnglish ? 'Ximory Technology Co., Ltd. All rights reserved.' : '心沐智康（杭州）科技有限公司 版权所有'}
+                © 2025 {isEnglish ? content.footer.copyright.company.en : content.footer.copyright.company.zh}
               </p>
               <p className="mt-2 md:mt-0">
-                {isEnglish ? 'ICP License: ' : 'ICP备案号：'}
-                <span className="text-slate-700">京ICP备2024000000号</span>
+                {isEnglish ? content.footer.copyright.icp.label.en : content.footer.copyright.icp.label.zh}
+                <span className="text-slate-700">{content.footer.copyright.icp.number}</span>
               </p>
             </div>
           </div>
