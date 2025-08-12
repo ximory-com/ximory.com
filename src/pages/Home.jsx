@@ -13,15 +13,15 @@ const Home = ({ showPage, isEnglish }) => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50 min-h-screen">
+      <section className="py-20 bg-gradient-to-br from-blue-50 via-sky-50 to-green-50 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <img 
-            src="/logo_vertical.png" 
+            src="/logo_vertical.svg" 
             alt={`${content.brand.name.zh} ${content.brand.name.en}`} 
             className="mx-auto mb-8 h-40 w-auto"
           />
           
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-800 via-blue-700 to-emerald-500 bg-clip-text text-transparent mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-sky-500 to-green-500 bg-clip-text text-transparent mb-6 leading-tight">
             {isEnglish ? (
               <>
                 {content.brand.tagline.en.line1}<br />
@@ -46,14 +46,14 @@ const Home = ({ showPage, isEnglish }) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button 
               onClick={() => showPage('health-assessment')}
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-800 to-emerald-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-900 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-green-500 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-green-600 transition-all shadow-lg hover:shadow-xl"
             >
               {isEnglish ? content.buttons.healthAssessment.en : content.buttons.healthAssessment.zh}
             </Button>
             <Button 
               onClick={() => scrollToSection('about')}
               variant="outline"
-              className="w-full sm:w-auto border-2 border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:bg-slate-50 transition-all"
+              className="w-full sm:w-auto border-2 border-blue-300 text-blue-700 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-all"
             >
               {isEnglish ? content.buttons.learnMore.en : content.buttons.learnMore.zh}
             </Button>
@@ -150,16 +150,16 @@ const Home = ({ showPage, isEnglish }) => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-slate-100">
+      <section id="contact" className="py-20 bg-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-800 to-emerald-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent mb-4">
               {isEnglish ? content.contact.title.en : content.contact.title.zh}
             </h2>
           </div>
           
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200">
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-blue-200">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-xl font-semibold text-slate-900 mb-6">
@@ -168,7 +168,7 @@ const Home = ({ showPage, isEnglish }) => {
                   <div className="space-y-4">
                     {content.contact.info.items.map((item, index) => (
                       <div key={index} className="flex items-center text-slate-700">
-                        <div className={`w-6 h-6 mr-3 ${index % 2 === 0 ? 'text-blue-600' : 'text-emerald-600'}`}>
+                        <div className={`w-6 h-6 mr-3 ${index % 2 === 0 ? 'text-blue-600' : 'text-green-600'}`}>
                           {item.icon}
                         </div>
                         <div>
@@ -200,16 +200,16 @@ const Home = ({ showPage, isEnglish }) => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-200 py-12">
+      <footer className="bg-gradient-to-r from-blue-100 to-green-100 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <img 
-                src="/logo_horizontal.png" 
+                src="/logo_horizontal.svg" 
                 alt={`${isEnglish ? content.brand.name.en : content.brand.name.zh} Logo`}
-                className="h-8 w-auto mb-4"
+                className="h-12 w-auto mb-4"
               />
-              <p className="text-slate-600 text-sm">
+              <p className="text-slate-700 text-sm">
                 {isEnglish ? content.footer.description.en : content.footer.description.zh}
               </p>
             </div>
@@ -218,9 +218,9 @@ const Home = ({ showPage, isEnglish }) => {
               <h4 className="text-slate-900 font-semibold mb-4">
                 {isEnglish ? content.footer.quickLinks.title.en : content.footer.quickLinks.title.zh}
               </h4>
-              <div className="space-y-2 text-slate-600 text-sm">
+              <div className="space-y-2 text-slate-700 text-sm">
                 {content.footer.quickLinks.items.map((link, index) => (
-                  <p key={index} className="hover:text-slate-900 cursor-pointer transition-colors">
+                  <p key={index} className="hover:text-blue-600 cursor-pointer transition-colors">
                     {isEnglish ? link.en : link.zh}
                   </p>
                 ))}
@@ -235,7 +235,7 @@ const Home = ({ showPage, isEnglish }) => {
                 {content.footer.social.items.map((social, index) => (
                   <div 
                     key={index}
-                    className={`w-8 h-8 ${social.color.startsWith('from-') ? `bg-gradient-to-r ${social.color}` : social.color} rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition-all`}
+                    className="w-8 h-8 bg-gradient-to-r from-blue-600 to-green-500 rounded-full flex items-center justify-center cursor-pointer hover:from-blue-700 hover:to-green-600 transition-all"
                   >
                     <span className="text-white text-sm">{social.label}</span>
                   </div>
@@ -244,8 +244,8 @@ const Home = ({ showPage, isEnglish }) => {
             </div>
           </div>
           
-          <div className="border-t border-slate-300 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center text-slate-600 text-sm">
+          <div className="border-t border-blue-200 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center text-slate-700 text-sm">
               <p>
                 © 2025 {isEnglish ? content.footer.copyright.company.en : content.footer.copyright.company.zh}
               </p>

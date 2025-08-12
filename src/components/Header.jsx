@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
+import content from '../config/content.json'
 
 const Header = ({ currentPage, showPage, isEnglish, toggleLanguage }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -33,8 +34,8 @@ const Header = ({ currentPage, showPage, isEnglish, toggleLanguage }) => {
           {/* Logo */}
           <div className="flex items-center justify-start">
             <img 
-              src="/logo_horizontal.png" 
-              alt="心沐智康 Ximory" 
+              src="/logo_horizontal.svg" 
+              alt={`${isEnglish ? content.brand.name.en : content.brand.name.zh} Logo`}
               className="h-16 w-auto cursor-pointer"
               onClick={() => showPage('home')}
             />
