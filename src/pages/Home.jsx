@@ -21,7 +21,7 @@ const Home = ({ showPage, isEnglish }) => {
             className="mx-auto mb-8 h-40 w-auto"
           />
           
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-sky-500 to-green-500 bg-clip-text text-transparent mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent mb-6 leading-tight">
             {isEnglish ? (
               <>
                 {content.brand.tagline.en.line1}<br />
